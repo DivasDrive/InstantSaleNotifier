@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">InstantSaleNotifier</string>
+    <string name="app_name">InstantSale</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
@@ -20,8 +20,9 @@
         completions."
     </string>
     <string name="title_activity_maps">Map</string>
-
     <string name="title_activity_welcome">WelcomeActivity</string>
-    <string name="dummy_button">Dummy Button</string>
+
+    <!-- Splash Activity-->
+    <string name="missing_logo">SALE logo </string>
     <string name="welcome_msg">Instant Sale </string>
 </resources>
