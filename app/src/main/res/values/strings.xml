@@ -25,4 +25,9 @@
     <!-- Splash Activity-->
     <string name="missing_logo">SALE logo </string>
     <string name="welcome_msg">Instant Sale </string>
+
+    <!--Login Activity-->
+    <string name="facebook_app_id">183599905534421</string>
+    <string name="fb_login_protocol_scheme">fb183599905534421</string>
+
 </resources>
