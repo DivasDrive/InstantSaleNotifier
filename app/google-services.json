@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "128957781645",
+    "project_id": "temporal-data-164215"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:128957781645:android:92b12e6f8b56402a",
+        "android_client_info": {
+          "package_name": "capstone.msd.conestoga.instantsalenotifier"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "128957781645-j16tvuggfhdvsbo7jpc9jei3ud2gam1i.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "capstone.msd.conestoga.instantsalenotifier",
+            "certificate_hash": "258968f01d777ea3e3c4c220c703b785662f8dfb"
+          }
+        },
+        {
+          "client_id": "128957781645-edsk4mqouvvoi333uv397h57qlc1200v.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBtY4gEVCuYuFNq6oVzGMJjrTqzgvua32c"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 1
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
