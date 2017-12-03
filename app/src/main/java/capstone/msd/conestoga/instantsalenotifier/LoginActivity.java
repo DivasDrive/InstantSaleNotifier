@@ -4,6 +4,7 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
 import android.app.LoaderManager.LoaderCallbacks;
+import android.app.ProgressDialog;
 import android.content.CursorLoader;
 import android.content.Intent;
 import android.content.Loader;
@@ -50,7 +51,7 @@ import static android.Manifest.permission.READ_CONTACTS;
 /**
  * A login screen that offers login via email/password.
  */
-public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<Cursor> {
+public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<Cursor>, OnClickListener {
     /**
      * Id to identity READ_CONTACTS permission request.
      */
@@ -78,6 +79,9 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     //Google Sign In
     private GoogleSignInClient mGoogleSignInClient;
     private int RC_SIGN_IN = 99;
+    // A progress dialog to display when the user is connecting in
+    // case there is a delay in any of the dialogs being ready.
+    private ProgressDialog mConnectionProgressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -101,12 +105,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         });
 
         Button mEmailSignInButton = (Button) findViewById(R.id.btnSignUp);
-        mEmailSignInButton.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                attemptLogin();
-            }
-        });
+        mEmailSignInButton.setOnClickListener(this);
 
         mLoginFormView = findViewById(R.id.login_form);
         mProgressView = findViewById(R.id.login_progress);
@@ -144,12 +143,11 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         // Build a GoogleSignInClient with the options specified by gso.
         mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
 
-        findViewById(R.id.sign_in_button).setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                signIn();
-            }
-        });
+        findViewById(R.id.sign_in_button).setOnClickListener(this);
+        // Configure the ProgressDialog that will be shown if there is a
+        // delay in presenting the user with the next sign in step.
+        mConnectionProgressDialog = new ProgressDialog(this);
+        mConnectionProgressDialog.setMessage("Signing in...");
     }
 
     @Override
@@ -160,6 +158,41 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         // the GoogleSignInAccount will be non-null.
         GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(this);
         // Catherine has to fix  updateUI(account);
+        //  String authCode = account.getServerAuthCode();
+        //  Log.d("InstantSale", authCode);
+        //mConnectionProgressDialog.setMessage(authCode);
+        /*
+         GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(this);
+        String authCode = account.getServerAuthCode();
+        final ProgressDialog progressDialog = new ProgressDialog(this);
+        progressDialog.setMessage("Checking sign in state...");
+        progressDialog.show();
+        */
+        /*
+        OptionalPendingResult<GoogleSignInResult> opr = Auth.GoogleSignInApi.silentSignIn(mGoogleApiClient); //mGoogleSignInClient ,mGoogleApiClient
+        if (opr.isDone()) {
+            // If the user's cached credentials are valid, the OptionalPendingResult will be "done"
+            // and the GoogleSignInResult will be available instantly. We can try and retrieve an
+            // authentication code.
+           //Log.d(TAG, "Got cached sign-in");
+            GoogleSignInResult result = opr.get();
+          //Catherine has to fix  handleSignInResult(result);
+        } else {
+            // If the user has not previously signed in on this device or the sign-in has expired,
+            // this asynchronous branch will attempt to sign in the user silently.  Cross-device
+            // single sign-on will occur in this branch.
+            final ProgressDialog progressDialog = new ProgressDialog(this);
+            progressDialog.setMessage("Checking sign in state...");
+            progressDialog.show();
+            opr.setResultCallback(new ResultCallback<GoogleSignInResult>() {
+                @Override
+                public void onResult(@NonNull GoogleSignInResult googleSignInResult) {
+                    progressDialog.dismiss();
+                    //Catherine has to fixhandleSignInResult(googleSignInResult);
+                }
+            });
+        }
+        */
     }
     private void populateAutoComplete() {
         if (!mayRequestContacts()) {
@@ -382,6 +415,19 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             //  Catherine has to fix  updateUI(true);
         }
     }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.sign_in_button:
+                signIn();
+                break;
+            case R.id.btnSignUp:
+                attemptLogin();
+                break;
+        }
+    }
+
     private interface ProfileQuery {
         String[] PROJECTION = {
                 ContactsContract.CommonDataKinds.Email.ADDRESS,
