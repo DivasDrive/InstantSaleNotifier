@@ -7,4 +7,6 @@
     <!-- Splash-->
     <color name="yellowLight">#FFFFF200</color>
     <color name="greenLight">#22741C</color>
+    <!-- Menu (Map)-->
+    <color name="navIcons">#AEAEAE</color>
 </resources>
