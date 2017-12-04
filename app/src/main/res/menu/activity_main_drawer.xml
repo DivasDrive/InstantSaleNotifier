@@ -24,7 +24,7 @@
             android:title="Tools" />
         <item
             android:id="@+id/nav_map"
-            android:icon="@drawable/ic_menu_map"
+            android:icon="@android:drawable/ic_dialog_map"
             android:title="Map" />
     </group>
 

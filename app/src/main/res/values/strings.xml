@@ -35,4 +35,13 @@
     <string name="facebook_app_id">183599905534421</string>
     <string name="fb_login_protocol_scheme">fb183599905534421</string>
     <string name="server_client_id">128957781645-4tpn09of1jnvs4p2vctnkekh4ff5aa45.apps.googleusercontent.com</string>
+
+    <!--Map Activity -->
+    <string name="default_info_title">Default Location</string>
+    <string name="default_info_snippet">No places found, because location permission is disabled.</string>
+    <string name="option_get_place">Get place</string>
+    <string name="pick_place">Choose a place</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
