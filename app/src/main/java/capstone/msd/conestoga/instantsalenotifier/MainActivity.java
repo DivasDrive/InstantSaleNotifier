@@ -16,8 +16,13 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
+import java.util.ArrayList;
+
+import capstone.msd.conestoga.instantsalenotifier.location.PermissionUtils;
+
 public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+        implements NavigationView.OnNavigationItemSelectedListener ,PermissionUtils.PermissionResultCallback{
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +48,8 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+
     }
 
     @Override
@@ -109,7 +116,9 @@ public class MainActivity extends AppCompatActivity
         }
         else if (id == R.id.nav_map) {
             //startActivity(new Intent(this, MapsActivity.class));
-            SaleMapFragment mapFragment = new SaleMapFragment();
+           // SaleMapFragment mapFragment = new SaleMapFragment();
+           // MapFragment mapFragment = new MapFragment();
+            InstantSaleMapFragment mapFragment = new InstantSaleMapFragment();
             FragmentManager mgrFragment = this.getSupportFragmentManager();
             mgrFragment.beginTransaction().replace(R.id.mainLayout, mapFragment).commit();
         }
@@ -117,5 +126,25 @@ public class MainActivity extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    @Override
+    public boolean PermissionGranted(int request_code) {
+        return true;
+    }
+
+    @Override
+    public void PartialPermissionGranted(int request_code, ArrayList<String> granted_permissions) {
+
+    }
+
+    @Override
+    public boolean PermissionDenied(int request_code) {
+        return false;
+    }
+
+    @Override
+    public void NeverAskAgain(int request_code) {
+
     }
 }

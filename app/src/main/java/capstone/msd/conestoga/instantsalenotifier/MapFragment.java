@@ -4,16 +4,19 @@ import android.Manifest;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.IntentSender;
-import android.content.pm.PackageManager;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
-import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
@@ -28,12 +31,7 @@ import com.google.android.gms.location.LocationSettingsRequest;
 import com.google.android.gms.location.LocationSettingsResult;
 import com.google.android.gms.location.LocationSettingsStates;
 import com.google.android.gms.location.LocationSettingsStatusCodes;
-import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.OnMapReadyCallback;
-import com.google.android.gms.maps.SupportMapFragment;
-import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -42,11 +40,11 @@ import java.util.Locale;
 
 import capstone.msd.conestoga.instantsalenotifier.location.PermissionUtils;
 
-import static android.content.pm.PackageManager.PERMISSION_GRANTED;
+import static com.facebook.FacebookSdk.getApplicationContext;
 
-public class MapsActivity extends FragmentActivity implements ActivityCompat.OnRequestPermissionsResultCallback, PermissionUtils.PermissionResultCallback,  GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
+public class MapFragment extends Fragment implements ActivityCompat.OnRequestPermissionsResultCallback, PermissionUtils.PermissionResultCallback,  GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
     //OnMapReadyCallback
-    private static final String TAG = MapsActivity.class.getSimpleName();
+    private static final String TAG = MapFragment.class.getSimpleName();
     private final static int PLAY_SERVICES_REQUEST = 1000;
     private final static int REQUEST_CHECK_SETTINGS = 2000;
     public static final int LOCATION_REQUEST_CODE = 80;
@@ -63,8 +61,34 @@ public class MapsActivity extends FragmentActivity implements ActivityCompat.OnR
 
     boolean isPermissionGranted;
 
-
+    public MapFragment() {
+        // Required empty public constructor
+    }
     @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        // Inflate the layout for this fragment
+        View view = inflater.inflate(R.layout.fragment_sale_map, container, false);
+        permissionUtils=new PermissionUtils((Activity)this.getActivity());
+
+        permissions.add(Manifest.permission.ACCESS_FINE_LOCATION);
+        permissions.add(Manifest.permission.ACCESS_COARSE_LOCATION);
+
+        permissionUtils.check_permission(permissions,"Need GPS permission for getting your location",1);
+
+        getLocation();
+
+        if (mLastLocation != null) {
+            latitude = mLastLocation.getLatitude();
+            longitude = mLastLocation.getLongitude();
+            getAddress();
+
+        } else {
+            showToast("Couldn't get the location. Make sure location is enabled on the device");
+        }
+        return view;
+    }
+   /* @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
@@ -75,7 +99,7 @@ public class MapsActivity extends FragmentActivity implements ActivityCompat.OnR
 
         //Checking if the user has granted location permission for this app
 
-        /*if ( ActivityCompat.checkSelfPermission(this,
+        *//*if ( ActivityCompat.checkSelfPermission(this,
                    android.Manifest.permission.ACCESS_FINE_LOCATION) != PERMISSION_GRANTED
                    && ActivityCompat.checkSelfPermission(this,
                    android.Manifest.permission.ACCESS_COARSE_LOCATION) != PERMISSION_GRANTED)
@@ -88,13 +112,13 @@ public class MapsActivity extends FragmentActivity implements ActivityCompat.OnR
 
             ActivityCompat.requestPermissions(this,new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION},LOCATION_REQUEST_CODE);
             return;
-        } */
+        } *//*
         //Instantiating the GoogleApiClient
-       /* googleApiClient = new GoogleApiClient.Builder(this)
+       *//* googleApiClient = new GoogleApiClient.Builder(this)
                 .addApi(LocationServices.API)
                 .addConnectionCallbacks(this)
                 .addOnConnectionFailedListener(this)
-                .build();*/
+                .build();*//*
         permissionUtils=new PermissionUtils(this);
 
         permissions.add(Manifest.permission.ACCESS_FINE_LOCATION);
@@ -112,7 +136,7 @@ public class MapsActivity extends FragmentActivity implements ActivityCompat.OnR
         } else {
             showToast("Couldn't get the location. Make sure location is enabled on the device");
         }
-    }
+    }*/
     /*@Override
     public void onStart() {
         super.onStart();
@@ -201,6 +225,7 @@ public class MapsActivity extends FragmentActivity implements ActivityCompat.OnR
      * */
 
     private void getLocation() {
+        isPermissionGranted = true;
         if (isPermissionGranted) {
             try
             {
@@ -221,7 +246,7 @@ public class MapsActivity extends FragmentActivity implements ActivityCompat.OnR
     {
         Geocoder geocoder;
         List<Address> addresses;
-        geocoder = new Geocoder(this, Locale.getDefault());
+        geocoder = new Geocoder(this.getContext(), Locale.getDefault());
 
         try {
             addresses = geocoder.getFromLocation(latitude,longitude, 1); // Here 1 represent max location result to returned, by documents it recommended 1 to 5
@@ -297,7 +322,7 @@ public class MapsActivity extends FragmentActivity implements ActivityCompat.OnR
      * */
 
     protected synchronized void buildGoogleApiClient() {
-        mGoogleApiClient = new GoogleApiClient.Builder(this)
+        mGoogleApiClient = new GoogleApiClient.Builder(this.getContext())
                 .addConnectionCallbacks(this)
                 .addOnConnectionFailedListener(this)
                 .addApi(LocationServices.API).build();
@@ -330,7 +355,7 @@ public class MapsActivity extends FragmentActivity implements ActivityCompat.OnR
                         try {
                             // Show the dialog by calling startResolutionForResult(),
                             // and check the result in onActivityResult().
-                            status.startResolutionForResult(MapsActivity.this, REQUEST_CHECK_SETTINGS);
+                            status.startResolutionForResult(MapFragment.this.getActivity(), REQUEST_CHECK_SETTINGS);
 
                         } catch (IntentSender.SendIntentException e) {
                             // Ignore the error.
@@ -356,17 +381,17 @@ public class MapsActivity extends FragmentActivity implements ActivityCompat.OnR
 
         GoogleApiAvailability googleApiAvailability = GoogleApiAvailability.getInstance();
 
-        int resultCode = googleApiAvailability.isGooglePlayServicesAvailable(this);
+        int resultCode = googleApiAvailability.isGooglePlayServicesAvailable(this.getContext());
 
         if (resultCode != ConnectionResult.SUCCESS) {
             if (googleApiAvailability.isUserResolvableError(resultCode)) {
-                googleApiAvailability.getErrorDialog(this,resultCode,
+                googleApiAvailability.getErrorDialog(this.getActivity(),resultCode,
                         PLAY_SERVICES_REQUEST).show();
             } else {
                 Toast.makeText(getApplicationContext(),
                         "This device is not supported.", Toast.LENGTH_LONG)
                         .show();
-                finish();
+                //finish();
             }
             return false;
         }
@@ -375,7 +400,7 @@ public class MapsActivity extends FragmentActivity implements ActivityCompat.OnR
 
 
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
 
         final LocationSettingsStates states = LocationSettingsStates.fromIntent(data);
         switch (requestCode) {
@@ -397,7 +422,7 @@ public class MapsActivity extends FragmentActivity implements ActivityCompat.OnR
 
 
     @Override
-    protected void onResume() {
+    public void onResume() {
         super.onResume();
         checkPlayServices();
     }
@@ -442,7 +467,7 @@ public class MapsActivity extends FragmentActivity implements ActivityCompat.OnR
     public boolean PermissionGranted(int request_code) {
         Log.i("PERMISSION","GRANTED");
         isPermissionGranted=true;
-        return isPermissionGranted;
+        return true;
     }
 
     @Override
@@ -463,7 +488,7 @@ public class MapsActivity extends FragmentActivity implements ActivityCompat.OnR
 
     public void showToast(String message)
     {
-        Toast.makeText(this,message,Toast.LENGTH_SHORT).show();
+        Toast.makeText(this.getContext(),message,Toast.LENGTH_SHORT).show();
     }
 
 }
