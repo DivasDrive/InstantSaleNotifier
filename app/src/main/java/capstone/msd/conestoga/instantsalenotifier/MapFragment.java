@@ -391,7 +391,7 @@ public class MapFragment extends Fragment implements ActivityCompat.OnRequestPer
                 Toast.makeText(getApplicationContext(),
                         "This device is not supported.", Toast.LENGTH_LONG)
                         .show();
-                //finish();
+                 getActivity().finish();
             }
             return false;
         }

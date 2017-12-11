@@ -1,7 +1,9 @@
 {
   "project_info": {
     "project_number": "128957781645",
-    "project_id": "temporal-data-164215"
+    "firebase_url": "https://temporal-data-164215.firebaseio.com",
+    "project_id": "temporal-data-164215",
+    "storage_bucket": "temporal-data-164215.appspot.com"
   },
   "client": [
     {
@@ -12,6 +14,14 @@
         }
       },
       "oauth_client": [
+        {
+          "client_id": "128957781645-puqfulshsv7v282e28rt068jjltt9cdb.apps.googleusercontent.com",
+          "client_type": 3
+        },
+        {
+          "client_id": "128957781645-4tpn09of1jnvs4p2vctnkekh4ff5aa45.apps.googleusercontent.com",
+          "client_type": 3
+        },
         {
           "client_id": "128957781645-j16tvuggfhdvsbo7jpc9jei3ud2gam1i.apps.googleusercontent.com",
           "client_type": 1,
@@ -35,11 +45,16 @@
           "status": 1
         },
         "appinvite_service": {
-          "status": 1,
-          "other_platform_oauth_client": []
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "128957781645-puqfulshsv7v282e28rt068jjltt9cdb.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         },
         "ads_service": {
-          "status": 1
+          "status": 2
         }
       }
     }

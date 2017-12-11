@@ -1,6 +1,7 @@
 package capstone.msd.conestoga.instantsalenotifier;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
@@ -19,6 +20,7 @@ import android.view.View;
 import java.util.ArrayList;
 
 import capstone.msd.conestoga.instantsalenotifier.location.PermissionUtils;
+import capstone.msd.conestoga.instantsalenotifier.messaging.MessagingActivity;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener ,PermissionUtils.PermissionResultCallback{
@@ -50,6 +52,13 @@ public class MainActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
 
 
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        //Catherine to to this : Check for Google Play services : onCreate() , onResume()
+        //GoogleApiAvailability.makeGooglePlayServicesAvailable()
     }
 
     @Override
@@ -101,18 +110,15 @@ public class MainActivity extends AppCompatActivity
                         }
                     }).show();
 
-        } else if (id == R.id.nav_camera) {
-            // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
+        } else if (id == R.id.nav_messaging) {
+           startActivity(new Intent(this, MessagingActivity.class));
+        } else if (id == R.id.nav_category) {
 
-        } else if (id == R.id.nav_slideshow) {
-
-        } else if (id == R.id.nav_manage) {
+        } else if (id == R.id.nav_coupons) {
 
         } else if (id == R.id.nav_share) {
 
         } else if (id == R.id.nav_send) {
-
         }
         else if (id == R.id.nav_map) {
             //startActivity(new Intent(this, MapsActivity.class));
@@ -121,6 +127,10 @@ public class MainActivity extends AppCompatActivity
             InstantSaleMapFragment mapFragment = new InstantSaleMapFragment();
             FragmentManager mgrFragment = this.getSupportFragmentManager();
             mgrFragment.beginTransaction().replace(R.id.mainLayout, mapFragment).commit();
+        }else if (id== R.id.nav_geoFence){
+            GeoFencingSalesMapFragment geoFencingFragment = new GeoFencingSalesMapFragment();
+            FragmentManager mgrFragment = this.getSupportFragmentManager();
+            mgrFragment.beginTransaction().replace(R.id.mainLayout, geoFencingFragment).commit();
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

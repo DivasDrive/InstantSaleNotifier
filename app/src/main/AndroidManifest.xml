@@ -23,6 +23,25 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <!-- [START fcm_default_icon] -->
+        <!-- Set custom default icon. This is used when no icon is set for incoming notification messages.
+             See README(https://goo.gl/l4GJaQ) for more. -->
+        <!--
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_icon"
+            android:resource="@drawable/ic_stat_ic_notification" /> -->
+        <!-- Set color used with incoming notification messages. This is used when no color is set for the incoming
+             notification message. See README(https://goo.gl/6BKBk7) for more. -->
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_color"
+            android:resource="@color/colorAccent" />
+        <!-- [END fcm_default_icon] -->
+        <!-- [START fcm_default_channel] -->
+        <!--
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_channel_id"
+            android:value="@string/default_notification_channel_id"/> -->
+        <!-- [END fcm_default_channel] -->
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name"
@@ -81,6 +100,28 @@
                         <data android:scheme="@string/fb_login_protocol_scheme" />
                     </intent-filter>
                 </activity>
+
+        <!--GeoFence service -->
+        <service android:name=".location.GeofenceRegistrationService"/>
+        <activity
+            android:name=".messaging.MessagingActivity"
+            android:label="@string/title_activity_messaging" />
+            <!-- [START firebase_service] -->
+        <!--
+
+            <service
+                android:name=".MyFirebaseMessagingService">
+                <intent-filter>
+                    <action android:name="com.google.firebase.MESSAGING_EVENT"/>
+                </intent-filter>
+            </service> -->
+            <!-- [START firebase_iid_service] -->
+            <service
+                android:name=".messaging.MyFirebaseInstanceIDService">
+                <intent-filter>
+                    <action android:name="com.google.firebase.INSTANCE_ID_EVENT"/>
+                </intent-filter>
+            </service>
 
             </application>
 
