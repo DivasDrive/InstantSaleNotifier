@@ -36,7 +36,7 @@
                 android:id="@+id/imgSaleLogo"
                 android:layout_width="321dp"
                 android:layout_height="130dp"
-                app:srcCompat="@drawable/login_sale"
+                app:srcCompat="@mipmap/ic_launcher"
                 tools:ignore="ContentDescription" />
             <!--Email-->
                 <AutoCompleteTextView

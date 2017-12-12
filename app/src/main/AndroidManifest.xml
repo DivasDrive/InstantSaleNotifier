@@ -107,14 +107,14 @@
             android:name=".messaging.MessagingActivity"
             android:label="@string/title_activity_messaging" />
             <!-- [START firebase_service] -->
-        <!--
+
 
             <service
-                android:name=".MyFirebaseMessagingService">
+                android:name=".messaging.MyFirebaseMessagingService">
                 <intent-filter>
                     <action android:name="com.google.firebase.MESSAGING_EVENT"/>
                 </intent-filter>
-            </service> -->
+            </service>
             <!-- [START firebase_iid_service] -->
             <service
                 android:name=".messaging.MyFirebaseInstanceIDService">
