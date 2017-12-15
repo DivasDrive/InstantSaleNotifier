@@ -19,6 +19,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationRequest;
@@ -57,30 +58,7 @@ public class InstantSaleMapFragment extends Fragment implements OnMapReadyCallba
     private DataBaseConnection connectionUtil = null;
     private Connection conn =null;
     public InstantSaleMapFragment() {
-        connectionUtil = new DataBaseConnection();
-        conn = connectionUtil.getConnection();
-        String selectSQL ="SELECT NAME FROM STORES ";
-        PreparedStatement pstmt =null;
-
-        try {
-            if (conn != null) {
-                pstmt = conn.prepareStatement(selectSQL);
-                ResultSet  rs =  pstmt.executeQuery();
-                while(rs.next()){
-                   Log.d(TAG, rs.getString(1));
-                }
-            }
-        }catch(SQLException e){
-            Log.e(TAG, e.getMessage());
-        }finally {
-            if(pstmt != null)
-                try {
-                    pstmt.close();
-                } catch (SQLException e) {
-                    Log.e(TAG, e.getMessage() );
-                }
-             connectionUtil.close();
-        }
+        //getDataFromDatabase();
     }
 
 
@@ -154,6 +132,8 @@ public class InstantSaleMapFragment extends Fragment implements OnMapReadyCallba
             e.printStackTrace();
         }
 
+
+
     }
 
     @Override
@@ -170,4 +150,35 @@ public class InstantSaleMapFragment extends Fragment implements OnMapReadyCallba
     public void onProviderDisabled(String s) {
 
     }
+    private void getDataFromDatabase(){
+
+        Log.d (TAG, "getDataFromDatabase");
+        connectionUtil = new DataBaseConnection();
+        conn = connectionUtil.getConnection();
+        String selectSQL ="SELECT NAME FROM STORES ";
+        PreparedStatement pstmt =null;
+
+        try {
+            if (conn != null) {
+                pstmt = conn.prepareStatement(selectSQL);
+                ResultSet  rs =  pstmt.executeQuery();
+                while(rs.next()){
+                    Log.d(TAG, rs.getString(1));
+                }
+            }else {
+                Toast.makeText(getApplicationContext(), "Connection Fail",Toast.LENGTH_LONG).show();
+            }
+        }catch(SQLException e){
+            Log.e(TAG, e.getMessage());
+        }finally {
+            if(pstmt != null)
+                try {
+                    pstmt.close();
+                } catch (SQLException e) {
+                    Log.e(TAG, e.getMessage() );
+                }
+            connectionUtil.close();
+        }
+    }
+
 }

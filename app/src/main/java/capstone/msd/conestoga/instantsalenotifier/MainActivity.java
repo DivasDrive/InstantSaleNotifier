@@ -2,6 +2,7 @@ package capstone.msd.conestoga.instantsalenotifier;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
@@ -13,18 +14,35 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ProgressBar;
+import android.widget.Toast;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
+import capstone.msd.conestoga.instantsalenotifier.database.Constants;
+import capstone.msd.conestoga.instantsalenotifier.database.RequestHandler;
 import capstone.msd.conestoga.instantsalenotifier.location.PermissionUtils;
 import capstone.msd.conestoga.instantsalenotifier.messaging.MessagingActivity;
+import capstone.msd.conestoga.instantsalenotifier.model.Store;
+
+import static android.view.View.GONE;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener ,PermissionUtils.PermissionResultCallback{
+    private String TAG =MainActivity.class.getSimpleName();
 
+    private ProgressBar progressBar;
+    private static final int CODE_GET_REQUEST = 1024;
+    private static final int CODE_POST_REQUEST = 1025;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,7 +69,7 @@ public class MainActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-
+        progressBar = (ProgressBar) findViewById(R.id.progressBar);
     }
 
     @Override
@@ -113,6 +131,11 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.nav_messaging) {
            startActivity(new Intent(this, MessagingActivity.class));
         } else if (id == R.id.nav_category) {
+            HashMap<String, String> params = new HashMap<>();
+
+            //Calling the retrieve store API
+            PerformNetworkRequest request = new PerformNetworkRequest(Constants.URL_GET_STORES, null, CODE_GET_REQUEST);
+            request.execute();
 
         } else if (id == R.id.nav_coupons) {
 
@@ -156,5 +179,93 @@ public class MainActivity extends AppCompatActivity
     @Override
     public void NeverAskAgain(int request_code) {
 
+    }
+
+    //inner class to perform network request extending an AsyncTask
+    private class PerformNetworkRequest extends AsyncTask<Void, Void, String> {
+
+        //the url where we need to send the request
+        String url;
+
+        //the parameters
+        HashMap<String, String> params;
+
+        //the request code to define whether it is a GET or POST
+        int requestCode;
+
+        //constructor to initialize values
+        PerformNetworkRequest(String url, HashMap<String, String> params, int requestCode) {
+            this.url = url;
+            this.params = params;
+            this.requestCode = requestCode;
+        }
+
+        //when the task started displaying a progressbar
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            progressBar.setVisibility(View.VISIBLE);
+        }
+
+
+        //this method will give the response from the request
+        @Override
+        protected void onPostExecute(String s) {
+            super.onPostExecute(s);
+            progressBar.setVisibility(GONE);
+            try {
+                JSONObject object = new JSONObject(s);
+                if (!object.getBoolean("error")) {
+                    Toast.makeText(getApplicationContext(), object.getString("message"), Toast.LENGTH_SHORT).show();
+                    //refreshing the herolist after every operation
+                    //so we get an updated list
+                    //we will create this method right now it is commented
+                    //because we haven't created it yet
+                    //refreshHeroList(object.getJSONArray("heroes"));
+                    refreshStoreList(object.getJSONArray("stores"));
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+
+        //the network operation will be performed in background
+        @Override
+        protected String doInBackground(Void... voids) {
+            RequestHandler requestHandler = new RequestHandler();
+
+            if (requestCode == CODE_POST_REQUEST)
+                return requestHandler.sendPostRequest(url, params);
+
+
+            if (requestCode == CODE_GET_REQUEST)
+                return requestHandler.sendGetRequest(url);
+
+            return null;
+        }
+    }
+    private void refreshStoreList(JSONArray stores) throws JSONException {
+        //clearing previous heroes
+       // heroList.clear();
+        ArrayList<Store> storeArrayList = new ArrayList<>();
+
+        //traversing through all the items in the json array
+        //the json we got from the response
+        for (int i = 0; i < stores.length(); i++) {
+            //getting each hero object
+            JSONObject obj = stores.getJSONObject(i);
+
+            //adding the hero to the list
+            storeArrayList.add(new Store(
+                    obj.getInt("id"),
+                    obj.getString("name")
+            ));
+        }
+        for (int i = 0; i < storeArrayList.size(); i++) {
+            Log.d(TAG, storeArrayList.get(i).getName());
+        }
+        //creating the adapter and setting it to the listview
+       // HeroAdapter adapter = new HeroAdapter(heroList);
+       // listView.setAdapter(adapter);
     }
 }
