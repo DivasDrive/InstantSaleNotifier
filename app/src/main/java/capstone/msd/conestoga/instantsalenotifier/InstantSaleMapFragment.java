@@ -128,10 +128,12 @@ public class InstantSaleMapFragment extends Fragment implements OnMapReadyCallba
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
-        // Add a marker in UPtown Shopping Center and move the camera
-        LatLng waterlooTownSquare = new LatLng(43.464146,-80.523346);
-        mMap.addMarker(new MarkerOptions().position(waterlooTownSquare).title("Waterloo Town Square"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(waterlooTownSquare,10.2f));
+        // Add a marker in "UpTown Waterloo Business Improvement Area" and move the camera
+        // UpTown Waterloo Business Improvement Area ::
+       //  Suite 160, 100 Regina Street South     Waterloo, Ontario, N2J 4P9
+        LatLng uptownWaterloo= new LatLng(43.4633696,-80.52017949999998);
+        mMap.addMarker(new MarkerOptions().position(uptownWaterloo).title("UpTown Waterloo"));
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(uptownWaterloo,10.2f));
 
         //getDataFromDatabase();
         requestStoreInfomation();
@@ -169,7 +171,7 @@ public class InstantSaleMapFragment extends Fragment implements OnMapReadyCallba
         mMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
             @Override
             public void onInfoWindowClick(Marker marker) {
-                Toast.makeText(getApplicationContext(),marker.getTitle(), Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(),marker.getTitle(), Toast.LENGTH_SHORT).show();
             }
         });
     }

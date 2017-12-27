@@ -30,6 +30,7 @@ import java.util.HashMap;
 
 import capstone.msd.conestoga.instantsalenotifier.database.Constants;
 import capstone.msd.conestoga.instantsalenotifier.database.RequestHandler;
+import capstone.msd.conestoga.instantsalenotifier.dummy.DummyContent;
 import capstone.msd.conestoga.instantsalenotifier.location.PermissionUtils;
 import capstone.msd.conestoga.instantsalenotifier.messaging.MessagingActivity;
 import capstone.msd.conestoga.instantsalenotifier.model.Store;
@@ -37,7 +38,7 @@ import capstone.msd.conestoga.instantsalenotifier.model.Store;
 import static android.view.View.GONE;
 
 public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener ,PermissionUtils.PermissionResultCallback{
+        implements NavigationView.OnNavigationItemSelectedListener ,PermissionUtils.PermissionResultCallback, CategoryFragment.OnListFragmentInteractionListener{
     private String TAG =MainActivity.class.getSimpleName();
 
     private ProgressBar progressBar;
@@ -131,11 +132,9 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.nav_messaging) {
            startActivity(new Intent(this, MessagingActivity.class));
         } else if (id == R.id.nav_category) {
-            //HashMap<String, String> params = new HashMap<>();
-
-            //Calling the retrieve store API
-           // PerformNetworkRequest request = new PerformNetworkRequest(Constants.URL_GET_STORES, null, CODE_GET_REQUEST);
-           // request.execute();
+            CategoryFragment categoryFragment = new CategoryFragment();
+            FragmentManager mgrFragment = this.getSupportFragmentManager();
+            mgrFragment.beginTransaction().replace(R.id.mainLayout, categoryFragment).commit();
 
         } else if (id == R.id.nav_coupons) {
 
@@ -181,94 +180,8 @@ public class MainActivity extends AppCompatActivity
 
     }
 
-    //inner class to perform network request extending an AsyncTask
-    private class PerformNetworkRequest extends AsyncTask<Void, Void, String> {
+    @Override
+    public void onListFragmentInteraction(DummyContent.DummyItem item) {
 
-        //the url where we need to send the request
-        String url;
-
-        //the parameters
-        HashMap<String, String> params;
-
-        //the request code to define whether it is a GET or POST
-        int requestCode;
-
-        //constructor to initialize values
-        PerformNetworkRequest(String url, HashMap<String, String> params, int requestCode) {
-            this.url = url;
-            this.params = params;
-            this.requestCode = requestCode;
-        }
-
-        //when the task started displaying a progressbar
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-            progressBar.setVisibility(View.VISIBLE);
-        }
-
-
-        //this method will give the response from the request
-        @Override
-        protected void onPostExecute(String s) {
-            super.onPostExecute(s);
-            progressBar.setVisibility(GONE);
-            try {
-                JSONObject object = new JSONObject(s);
-                if (!object.getBoolean("error")) {
-                    Toast.makeText(getApplicationContext(), object.getString("message"), Toast.LENGTH_SHORT).show();
-                    //refreshing the herolist after every operation
-                    //so we get an updated list
-                    //we will create this method right now it is commented
-                    //because we haven't created it yet
-                    //refreshHeroList(object.getJSONArray("heroes"));
-                    refreshStoreList(object.getJSONArray("stores"));
-                }
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-        }
-
-        //the network operation will be performed in background
-        @Override
-        protected String doInBackground(Void... voids) {
-            RequestHandler requestHandler = new RequestHandler();
-
-            if (requestCode == CODE_POST_REQUEST)
-                return requestHandler.sendPostRequest(url, params);
-
-
-            if (requestCode == CODE_GET_REQUEST)
-                return requestHandler.sendGetRequest(url);
-
-            return null;
-        }
-    }
-    private void refreshStoreList(JSONArray stores) throws JSONException {
-        //clearing previous heroes
-       // heroList.clear();
-        ArrayList<Store> storeArrayList = new ArrayList<>();
-
-        //traversing through all the items in the json array
-        //the json we got from the response
-        for (int i = 0; i < stores.length(); i++) {
-            //getting each hero object
-            JSONObject obj = stores.getJSONObject(i);
-
-            //adding the hero to the list
-            storeArrayList.add(new Store(
-                    obj.getInt("id"),
-                    obj.getString("name"),
-                    obj.getString("address"),
-                    obj.getDouble("lantitude"),
-                    obj.getDouble("longtitude")
-            ));
-        }
-        for (int i = 0; i < storeArrayList.size(); i++) {
-            Log.d(TAG, storeArrayList.get(i).getName());
-        }
-        //creating the adapter and setting it to the listview
-       // HeroAdapter adapter = new HeroAdapter(heroList);
-       // listView.setAdapter(adapter);
     }
 }
