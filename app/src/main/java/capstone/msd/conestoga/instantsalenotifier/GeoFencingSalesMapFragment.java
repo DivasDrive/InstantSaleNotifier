@@ -318,7 +318,7 @@ public class GeoFencingSalesMapFragment extends Fragment implements OnMapReadyCa
         longitude = location.getLongitude();
 
         Log.d(TAG, "onLocationChanged latitude :" + latitude +" ,longitude: "+longitude);
-        mapFragment.getMapAsync(this);
+      //  mapFragment.getMapAsync(this);
     }
 
     @Override

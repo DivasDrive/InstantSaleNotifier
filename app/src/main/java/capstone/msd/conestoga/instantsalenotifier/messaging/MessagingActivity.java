@@ -6,7 +6,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
-import android.os.PersistableBundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -40,7 +39,7 @@ public class MessagingActivity extends AppCompatActivity {
             mTextview.setText(SharedPrepManager.getInstance(MessagingActivity.this).getToken());
             Log.d("getToken:", SharedPrepManager.getInstance(MessagingActivity.this).getToken());
         }
-        this.registerReceiver(mBroadcastReceiver,new IntentFilter(MyFirebaseInstanceIDService.TOKEN_BROADCAST));
+        this.registerReceiver(mBroadcastReceiver,new IntentFilter(FCM_IDService.TOKEN_BROADCAST));
 
     }
 }

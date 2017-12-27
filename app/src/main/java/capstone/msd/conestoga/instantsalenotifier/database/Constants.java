@@ -6,7 +6,7 @@ package capstone.msd.conestoga.instantsalenotifier.database;
 
 public class Constants {
 
-    private static final String ROOT_URL = "http://localhost/InstantSaleNotifier/Api.php?apicall=";
+    private static final String ROOT_URL = "http://aashritha.000webhostapp.com/InstantSaleNotifier/Api.php?apicall=";
 
     public static final String URL_GET_STORES= ROOT_URL + "getstores";
 

@@ -81,6 +81,7 @@ public class RequestHandler {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        Log.d(TAG, "Get Result from database: " +sb.toString());
         return sb.toString();
     }
 

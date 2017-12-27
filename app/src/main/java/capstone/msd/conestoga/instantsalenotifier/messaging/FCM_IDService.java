@@ -10,7 +10,7 @@ import com.google.firebase.iid.FirebaseInstanceIdService;
  * Created by CatherineChoi on 12/11/2017.
  */
 
-public class MyFirebaseInstanceIDService extends FirebaseInstanceIdService {
+public class FCM_IDService extends FirebaseInstanceIdService {
     private static final String TAG = "MyFirebaseIIDService";
     public static final String TOKEN_BROADCAST="FCM_TOKEN_BROADCAST";
 
@@ -41,6 +41,11 @@ public class MyFirebaseInstanceIDService extends FirebaseInstanceIdService {
     private void sendRegistrationToServer(String token) {
         // TODO: Implement this method to send token to your app server.
     }
+
+    /**
+     * Save token in the local device
+     * * @param token
+     */
     private void storeToken(String token){
         SharedPrepManager.getInstance(this.getApplicationContext()).storeToken(token);
     }

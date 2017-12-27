@@ -131,11 +131,11 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.nav_messaging) {
            startActivity(new Intent(this, MessagingActivity.class));
         } else if (id == R.id.nav_category) {
-            HashMap<String, String> params = new HashMap<>();
+            //HashMap<String, String> params = new HashMap<>();
 
             //Calling the retrieve store API
-            PerformNetworkRequest request = new PerformNetworkRequest(Constants.URL_GET_STORES, null, CODE_GET_REQUEST);
-            request.execute();
+           // PerformNetworkRequest request = new PerformNetworkRequest(Constants.URL_GET_STORES, null, CODE_GET_REQUEST);
+           // request.execute();
 
         } else if (id == R.id.nav_coupons) {
 
@@ -258,7 +258,10 @@ public class MainActivity extends AppCompatActivity
             //adding the hero to the list
             storeArrayList.add(new Store(
                     obj.getInt("id"),
-                    obj.getString("name")
+                    obj.getString("name"),
+                    obj.getString("address"),
+                    obj.getDouble("lantitude"),
+                    obj.getDouble("longtitude")
             ));
         }
         for (int i = 0; i < storeArrayList.size(); i++) {

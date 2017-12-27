@@ -16,9 +16,9 @@ import java.sql.SQLException;
 public class DataBaseConnection {
     private String TAG="DataBaseConnection";
     private String className="com.mysql.jdbc.Driver";
-    private String  url ="jdbc:mysql://127.0.0.1:3306/instantsalenotifier";
-    private String userId ="root";
-    private String password ="";
+    private String  url ="jdbc:mysql://aashritha.000webhostapp.com/instantsalenotifier";
+    private String userId ="id123076_instantsalenotifier";
+    private String password ="aashu1991";
     private Connection conn = null;
 
 
