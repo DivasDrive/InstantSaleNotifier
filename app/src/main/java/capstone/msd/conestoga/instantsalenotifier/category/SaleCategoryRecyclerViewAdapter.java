@@ -1,5 +1,6 @@
-package capstone.msd.conestoga.instantsalenotifier;
+package capstone.msd.conestoga.instantsalenotifier.category;
 
+import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -7,11 +8,12 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import capstone.msd.conestoga.instantsalenotifier.CategoryFragment.OnListFragmentInteractionListener;
+import capstone.msd.conestoga.instantsalenotifier.R;
+import capstone.msd.conestoga.instantsalenotifier.category.CategoryFragment.OnListFragmentInteractionListener;
 import capstone.msd.conestoga.instantsalenotifier.dummy.DummyContent.DummyItem;
 import capstone.msd.conestoga.instantsalenotifier.model.StoreCategory;
+import capstone.msd.conestoga.instantsalenotifier.utils.Constants;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -19,14 +21,14 @@ import java.util.List;
  * specified {@link OnListFragmentInteractionListener}.
  * TODO: Replace the implementation with code for your data type.
  */
-public class InstanceSaleCategoryRecyclerViewAdapter extends RecyclerView.Adapter<InstanceSaleCategoryRecyclerViewAdapter.ViewHolder> {
+public class SaleCategoryRecyclerViewAdapter extends RecyclerView.Adapter<SaleCategoryRecyclerViewAdapter.ViewHolder> {
     //private final List[StoreCategory] categoryList;
 
-    private final List<DummyItem> mValues;
+    private final List<StoreCategory> mValues;
     private final OnListFragmentInteractionListener mListener;
 
-    public InstanceSaleCategoryRecyclerViewAdapter(List<DummyItem> items, OnListFragmentInteractionListener listener) {
-        //categoryList = new ArrayList<StoreCategory>();
+
+    public SaleCategoryRecyclerViewAdapter(List<StoreCategory> items, OnListFragmentInteractionListener listener) {
 
         mValues = items;
         mListener = listener;
@@ -35,16 +37,17 @@ public class InstanceSaleCategoryRecyclerViewAdapter extends RecyclerView.Adapte
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.fragment_category, parent, false);
+                .inflate(R.layout.fragment_category_list_item, parent, false);
         return new ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
         holder.mItem = mValues.get(position);
-        holder.mCateroyImage.setBackgroundResource(R.drawable.travel);
-      //  holder.mIdView.setText(mValues.get(position).id);
-        holder.mContentView.setText(mValues.get(position).content);
+        holder.mCategoryImage.setImageResource(mValues.get(position).getResourceId());
+        holder.mCategoryTitle.setText(mValues.get(position).getTitle());
+     //   holder.mView.setBackgroundColor(Color.parseColor(Constants.gridColor[position]));
+        holder.mCategoryTitle.setBackgroundColor(Color.parseColor(Constants.gridTitleColor[position]));
 
         holder.mView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -63,24 +66,30 @@ public class InstanceSaleCategoryRecyclerViewAdapter extends RecyclerView.Adapte
         return mValues.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    public class ViewHolder extends RecyclerView.ViewHolder{// implements View.OnClickListener {
         public final View mView;
-        public final ImageView mCateroyImage;
-    //    public final TextView mIdView;
-        public final TextView mContentView;
-        public DummyItem mItem;
+        public final ImageView mCategoryImage;
+        public final TextView mCategoryTitle;
+        public StoreCategory mItem;
 
-        public ViewHolder(View view) {
-            super(view);
-            mView = view;
-            mCateroyImage = (ImageView)view.findViewById(R.id.imgCategory);
-  //          mIdView = (TextView) view.findViewById(R.id.id);
-            mContentView = (TextView) view.findViewById(R.id.content);
+        public ViewHolder(View itemView) {
+            super(itemView);
+            mView = itemView;
+            mCategoryImage = (ImageView)itemView.findViewById(R.id.categoryImage);
+            mCategoryTitle = (TextView) itemView.findViewById(R.id.categoryTitle);
+        }
+        public void bingView(int position){
+
         }
 
         @Override
         public String toString() {
-            return super.toString() + " '" + mContentView.getText() + "'";
+            return super.toString() + " '" + mCategoryTitle.getText() + "'";
         }
+
+        /*@Override
+        public void onClick(View view) {
+
+        }*/
     }
 }

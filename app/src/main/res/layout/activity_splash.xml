@@ -25,7 +25,7 @@
         android:layout_marginTop="26dp"
         android:text="@string/welcome_msg"
         android:textAppearance="@style/TextAppearance.AppCompat.Display1"
-        android:textColor="@color/greenLight"
+        android:textColor="@color/greenDark"
         android:textSize="36sp" />
 
 </RelativeLayout>

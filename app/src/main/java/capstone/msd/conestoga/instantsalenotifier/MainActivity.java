@@ -2,7 +2,6 @@ package capstone.msd.conestoga.instantsalenotifier;
 
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
@@ -14,28 +13,18 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ProgressBar;
-import android.widget.Toast;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
-import capstone.msd.conestoga.instantsalenotifier.database.Constants;
-import capstone.msd.conestoga.instantsalenotifier.database.RequestHandler;
+import capstone.msd.conestoga.instantsalenotifier.category.CategoryFragment;
 import capstone.msd.conestoga.instantsalenotifier.dummy.DummyContent;
 import capstone.msd.conestoga.instantsalenotifier.location.PermissionUtils;
 import capstone.msd.conestoga.instantsalenotifier.messaging.MessagingActivity;
-import capstone.msd.conestoga.instantsalenotifier.model.Store;
-
-import static android.view.View.GONE;
+import capstone.msd.conestoga.instantsalenotifier.model.StoreCategory;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener ,PermissionUtils.PermissionResultCallback, CategoryFragment.OnListFragmentInteractionListener{
@@ -181,7 +170,7 @@ public class MainActivity extends AppCompatActivity
     }
 
     @Override
-    public void onListFragmentInteraction(DummyContent.DummyItem item) {
+    public void onListFragmentInteraction(StoreCategory storeCategory) {
 
     }
 }

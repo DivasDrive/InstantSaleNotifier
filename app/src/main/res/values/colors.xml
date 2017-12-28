@@ -6,7 +6,23 @@
     <color name="black_overlay">#66000000</color>
     <!-- Splash-->
     <color name="yellowLight">#FFFFF200</color>
-    <color name="greenLight">#22741C</color>
+    <color name="greenDark">#22741C</color>
     <!-- Menu (Map)-->
     <color name="navIcons">#AEAEAE</color>
+
+    <!--Category-->
+    <color name="categoryPrimaryColor">#FFC107</color>
+    <color name="categoryLightOrange">#FFA000</color>
+    <color name="categoryBackground">#FCFCFC</color>
+    <color name="colorLightGray">#EDEDED</color>
+    <color name="categoryDeepPurple">#8C3283</color>
+    <color name="categoryLightBlue">#7C4DFF</color>
+    <color name="categoryDeepBlue">#0049E6</color>
+    <color name="categoryDeepPink">#EE499B</color>
+    <color name="categoryDeepGreeen">#0EB4B4</color>
+    <color name="categoryDeepRed">#EE3A4A</color>
+    <color name="categoryLightPink">#FDE7D4</color>
+    <color name="categoryLightGreen">#CDDEB5</color>
+    <color name="categoryMaterialYellow">#FFb300</color>
+    <color name="categoryMaterialGreen">#00BFA5</color>
 </resources>

@@ -1,4 +1,4 @@
-package capstone.msd.conestoga.instantsalenotifier;
+package capstone.msd.conestoga.instantsalenotifier.category;
 
 import android.app.Activity;
 import android.content.Context;
@@ -13,10 +13,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import capstone.msd.conestoga.instantsalenotifier.R;
 import capstone.msd.conestoga.instantsalenotifier.dummy.DummyContent;
 import capstone.msd.conestoga.instantsalenotifier.dummy.DummyContent.DummyItem;
-
-import java.util.List;
+import capstone.msd.conestoga.instantsalenotifier.model.StoreCategory;
 
 /**
  * A fragment representing a list of Items.
@@ -62,22 +65,37 @@ public class CategoryFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_category_list, container, false);
+        RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.listRecyclerView);
 
         // Set the adapter
-        if (view instanceof RecyclerView) {
+        if (recyclerView instanceof RecyclerView) {
             Context context = view.getContext();
-            RecyclerView recyclerView = (RecyclerView) view;
             if (mColumnCount <= 1) {
                 recyclerView.setLayoutManager(new LinearLayoutManager(context));
             } else {
                 recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
             }
-            recyclerView.setAdapter(new InstanceSaleCategoryRecyclerViewAdapter(DummyContent.ITEMS, mListener));
+
+            List<StoreCategory> listCategory =  getStoreCategoryList();
+            recyclerView.setAdapter(new SaleCategoryRecyclerViewAdapter(listCategory, mListener));
         }
         return view;
+    }
+
+    private List<StoreCategory> getStoreCategoryList(){
+        String[] categoryTitleList = new String[]{"Arts & Cultures","Beauty","Beer, Wine & Alchol","Books","Children & Baby","Clothing & Accessories", "Eye Care","Fitness & Sports","Gifts, Stationary & Flowers","Grocery & Specialty Food","Home Furnishing & Interior","Jewellers","Music","Variety & Specialty Shops"};
+        int[] categoryImageList = new int[]{R.drawable.electronics, R.drawable.entertainment,R.drawable.fashion,R.drawable.finance_insurance,R.drawable.lifestyle,R.drawable.motoring, R.drawable.other,R.drawable.travel,R.drawable.lifestyle,R.drawable.motoring,R.drawable.finance_insurance,R.drawable.fashion,R.drawable.electronics,R.drawable.entertainment,R.drawable.electronics};
+
+        List<StoreCategory> categoryList = new ArrayList<StoreCategory>();
+
+        for (int i = 0; i < categoryTitleList.length; i++) {
+            StoreCategory storeCategory = new StoreCategory(categoryTitleList[i],categoryImageList[i] );
+            categoryList.add(storeCategory);
+        }
+
+        return categoryList;
     }
 
     /**
@@ -125,6 +143,6 @@ public class CategoryFragment extends Fragment {
      */
     public interface OnListFragmentInteractionListener {
         // TODO: Update argument type and name
-        void onListFragmentInteraction(DummyItem item);
+        void onListFragmentInteraction(StoreCategory storeCategory);
     }
 }
