@@ -127,14 +127,7 @@ public class MainActivity extends AppCompatActivity
 
         } else if (id == R.id.nav_coupons) {
 
-        } else if (id == R.id.nav_share) {
-
-        } else if (id == R.id.nav_send) {
-        }
-        else if (id == R.id.nav_map) {
-            //startActivity(new Intent(this, MapsActivity.class));
-           // SaleMapFragment mapFragment = new SaleMapFragment();
-           // MapFragment mapFragment = new MapFragment();
+        }  else if (id == R.id.nav_map) {
             InstantSaleMapFragment mapFragment = new InstantSaleMapFragment();
             FragmentManager mgrFragment = this.getSupportFragmentManager();
             mgrFragment.beginTransaction().replace(R.id.mainLayout, mapFragment).commit();

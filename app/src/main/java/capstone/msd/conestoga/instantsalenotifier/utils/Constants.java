@@ -22,10 +22,10 @@ public class Constants {
     public static final int[] gridTitleColor_ID ={
             R.color.colorAccent, R.color.categoryLightBlue,
             R.color.categoryMaterialYellow, R.color.categoryDeepBlue,
-            R.color.yellowLight, R.color.categoryDeepPink,
+            R.color.lightYellow, R.color.categoryDeepPink,
             R.color.categoryDeepRed, R.color.categoryLightPink,
             R.color.categoryLightGreen, R.color.categoryMaterialGreen,
-            R.color.categoryDeepPurple, R.color.greenDark,
+            R.color.categoryDeepPurple, R.color.darkGreen,
             R.color.categoryLightOrange, R.color.colorPrimaryDark
     };
     public static final String[] gridTitleColor ={

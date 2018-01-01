@@ -5,11 +5,11 @@
     <color name="colorAccent">#FF4081</color>
     <color name="black_overlay">#66000000</color>
     <!-- Splash-->
-    <color name="yellowLight">#FFFFF200</color>
-    <color name="greenDark">#22741C</color>
+    <color name="lightYellow">#FFFFF200</color>
+    <color name="darkGreen">#22741C</color>
     <!-- Menu (Map)-->
-    <color name="navIcons">#AEAEAE</color>
-
+    <color name="lightGray">#AEAEAE</color>
+    <color name="darkGray">#6E6E6E</color>
     <!--Category-->
     <color name="categoryPrimaryColor">#FFC107</color>
     <color name="categoryLightOrange">#FFA000</color>
