@@ -1,5 +1,4 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -8,102 +7,94 @@
     android:padding="@dimen/activity_vertical_margin"
     tools:context="capstone.msd.conestoga.instantsalenotifier.LoginActivity">
 
-    <ImageView
-        android:id="@+id/imgSaleLogo"
-        android:layout_width="321dp"
-        android:layout_height="130dp"
-        android:layout_gravity="center_horizontal"
-        app:srcCompat="@mipmap/ic_launcher"
-        tools:ignore="ContentDescription" />
-
-    <com.facebook.login.widget.LoginButton
-        android:id="@+id/facebook_login_button"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="20dp"
-        android:textSize="20sp" />
-
-    <com.google.android.gms.common.SignInButton
-        android:id="@+id/google_sign_in"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="20dp"
-        android:textSize="20sp"/>
-
-    <Button
-        android:id="@+id/btnSignUp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:background="@drawable/bg_signup"
-        android:clickable="true"
-        android:text="@string/signUp"
-        android:textColor="@android:color/white" />
-
+    <!-- Login progress -->
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal" >
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="30dp">
 
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Already have an account?"
-            android:textAppearance="@style/TextAppearance.AppCompat.Display1"
-            android:textColor="@color/com_facebook_button_background_color_pressed"
-            android:textSize="20sp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="@dimen/title_top_margin"
+            android:text="@string/login"
+            android:textAlignment="center"
+            android:textAllCaps="true"
+            android:textSize="@dimen/text_title_size"
             android:textStyle="bold" />
+
+        <AutoCompleteTextView
+            android:id="@+id/email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="40dp"
+            android:background="@drawable/edittext_style"
+            android:hint="@string/prompt_email"
+            android:inputType="textEmailAddress" />
+
+        <EditText
+            android:id="@+id/password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="40dp"
+            android:background="@drawable/edittext_style"
+            android:hint="@string/prompt_password"
+            android:imeActionId="@+id/login"
+            android:imeActionLabel="@string/action_sign_in_short"
+            android:imeOptions="actionUnspecified"
+            android:inputType="textPassword"
+            android:maxLines="1" />
+
+        <android.support.v7.widget.AppCompatCheckBox
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="10dp"
+            android:padding="4dp"
+            android:text="@string/rememberMe"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="15sp" />
 
         <Button
             android:id="@+id/btnLogin"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:background="@drawable/bg_login"
+            android:layout_marginTop="40dp"
+            android:background="@drawable/bg_signup"
             android:clickable="true"
             android:text="@string/login"
             android:textColor="@android:color/white" />
+        <Button
+            android:id="@+id/btnResetPassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="@string/reset_password"
+            android:background="@drawable/bg_login"/>
+        <TextView
+            android:id="@+id/txtAskSignIn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:inputType="none"
+            android:text="@string/action_sign_in"
+            android:textAlignment="center"
+            android:textSize="20sp" />
+
     </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
+
+    <ProgressBar
+        android:id="@+id/login_progress"
+        style="?android:attr/progressBarStyleLarge"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginTop="10dp"
-        android:paddingLeft="20dp"
-        android:paddingRight="20dp">
+        android:layout_marginBottom="8dp"
+        android:visibility="gone" />
 
-        <Button
-            android:id="@+id/btnUser"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:clickable="true"
-            android:text="USER" />
 
-        <Button
-            android:id="@+id/btnStore"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:clickable="true"
-            android:text="STORE"  />
-    </LinearLayout>
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:lineSpacingExtra="10sp"
-        android:layout_marginTop="50dp"
-        android:text="By \n Diva's 3Drive"
-        android:textAlignment="center"
-        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
-        android:textColor="@color/com_facebook_button_background_color_pressed"
-        android:textSize="20sp"
-        android:textStyle="bold" />
 </LinearLayout>
-
-

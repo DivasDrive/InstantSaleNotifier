@@ -1,4 +1,4 @@
-package capstone.msd.conestoga.instantsalenotifier.category;
+package capstone.msd.conestoga.instantsalenotifier.coupons;
 
 import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
@@ -7,54 +7,49 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-
-import capstone.msd.conestoga.instantsalenotifier.R;
-import capstone.msd.conestoga.instantsalenotifier.dummy.DummyContent.DummyItem;
-import capstone.msd.conestoga.instantsalenotifier.model.StoreCategory;
-import capstone.msd.conestoga.instantsalenotifier.utils.Constants;
+import android.widget.Toast;
 
 import java.util.List;
 
+import capstone.msd.conestoga.instantsalenotifier.R;
+import capstone.msd.conestoga.instantsalenotifier.dummy.DummyContent.DummyItem;
+import capstone.msd.conestoga.instantsalenotifier.model.Discount;
+import capstone.msd.conestoga.instantsalenotifier.model.StoreCategory;
+import capstone.msd.conestoga.instantsalenotifier.utils.Constants;
+
 /**
  * {@link RecyclerView.Adapter} that can display a {@link DummyItem} and makes a call to the
+
  * TODO: Replace the implementation with code for your data type.
  */
-public class SaleCategoryRecyclerViewAdapter extends RecyclerView.Adapter<SaleCategoryRecyclerViewAdapter.ViewHolder> {
+public class DiscounViewAdapter extends RecyclerView.Adapter<DiscounViewAdapter.ViewHolder> {
     //private final List[StoreCategory] categoryList;
 
-    private final List<StoreCategory> mValues;
-  //  private final OnListFragmentInteractionListener mListener;
+    private final List<Discount> mValues;
 
 
-    //public SaleCategoryRecyclerViewAdapter(List<StoreCategory> items, OnListFragmentInteractionListener listener) {
-    public SaleCategoryRecyclerViewAdapter(List<StoreCategory> items ) {
+    public DiscounViewAdapter(List<Discount> items ) {
         mValues = items;
-      //  mListener = listener;
+
     }
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.fragment_category_list_item, parent, false);
+                .inflate(R.layout.fragment_list_item, parent, false);
         return new ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
         holder.mItem = mValues.get(position);
-        holder.mCategoryImage.setImageResource(mValues.get(position).getResourceId());
-        holder.mCategoryTitle.setText(mValues.get(position).getTitle());
-     //   holder.mView.setBackgroundColor(Color.parseColor(Constants.gridColor[position]));
-        holder.mCategoryTitle.setBackgroundColor(Color.parseColor(Constants.gridTitleColor[position]));
+       // holder.mItemImage.setImageResource(mValues.get(position).getResourceId());
+        holder.mItemTitle.setText(mValues.get(position).getName());
 
         holder.mView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-             /*   if (null != mListener) {
-                    // Notify the active callbacks interface (the activity, if the
-                    // fragment is attached to one) that an item has been selected.
-                  //  mListener.onListFragmentInteraction(holder.mItem);
-                }*/
+
             }
         });
     }
@@ -66,15 +61,15 @@ public class SaleCategoryRecyclerViewAdapter extends RecyclerView.Adapter<SaleCa
 
     public class ViewHolder extends RecyclerView.ViewHolder{// implements View.OnClickListener {
         public final View mView;
-        public final ImageView mCategoryImage;
-        public final TextView mCategoryTitle;
-        public StoreCategory mItem;
+        public final ImageView mItemImage;
+        public final TextView mItemTitle;
+        public Discount mItem;
 
         public ViewHolder(View itemView) {
             super(itemView);
             mView = itemView;
-            mCategoryImage = (ImageView)itemView.findViewById(R.id.categoryImage);
-            mCategoryTitle = (TextView) itemView.findViewById(R.id.categoryTitle);
+            mItemImage = (ImageView)itemView.findViewById(R.id.item_image);
+            mItemTitle = (TextView) itemView.findViewById(R.id.item_title);
         }
         public void bingView(int position){
 
@@ -82,7 +77,7 @@ public class SaleCategoryRecyclerViewAdapter extends RecyclerView.Adapter<SaleCa
 
         @Override
         public String toString() {
-            return super.toString() + " '" + mCategoryTitle.getText() + "'";
+            return super.toString() + " '" + mItemTitle.getText() + "'";
         }
 
         /*@Override

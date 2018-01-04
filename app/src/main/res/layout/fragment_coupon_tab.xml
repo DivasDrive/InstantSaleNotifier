@@ -1,0 +1,33 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="capstone.msd.conestoga.instantsalenotifier.coupons.CouponTabFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+
+    <android.support.design.widget.TabLayout
+        android:id="@+id/coupon_tabs"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/lightGray"
+        app:tabIndicatorColor="@color/categoryMaterialYellow"
+        app:tabMode="fixed"
+        app:tabSelectedTextColor="@color/categoryMaterialYellow"
+        app:tabTextColor="@color/categoryBackground"></android.support.design.widget.TabLayout>
+
+    <view
+        class="android.support.v4.view.ViewPager"
+        id="@+id/viewPager"
+        layout_alignParentBottom="true"
+        layout_alignParentLeft="true"
+        layout_alignParentStart="true"
+        layout_marginBottom="71dp"
+        layout_marginLeft="85dp"
+        layout_marginStart="85dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+
+</RelativeLayout>

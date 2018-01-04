@@ -29,6 +29,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
@@ -42,7 +43,10 @@ import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.api.ApiException;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -67,7 +71,9 @@ public class SignUpActivity extends AppCompatActivity implements LoaderCallbacks
     private AutoCompleteTextView mEmailView;
     private EditText mPasswordView;
     private View mProgressView;
-    private View mLoginFormView;
+    private TextView txtFinishSingIn;
+
+    private FirebaseAuth firebaseAuth ;
 
 
     @Override
@@ -92,11 +98,15 @@ public class SignUpActivity extends AppCompatActivity implements LoaderCallbacks
             }
         });
 
-        Button mEmailSignInButton = (Button) findViewById(R.id.btnCreateAccount);
-        mEmailSignInButton.setOnClickListener(this);
+        Button mBtnCreateAccount = (Button) findViewById(R.id.btnCreateAccount);
+        mBtnCreateAccount.setOnClickListener(this);
+
+        txtFinishSingIn = (TextView)findViewById(R.id.txtFinishSingIn);
+        txtFinishSingIn.setOnClickListener(this);
 
         mProgressView = findViewById(R.id.login_progress);
 
+        firebaseAuth = FirebaseAuth.getInstance();
     }
 
 
@@ -120,9 +130,9 @@ public class SignUpActivity extends AppCompatActivity implements LoaderCallbacks
         mPasswordView.setError(null);
 
         // Store values at the time of the login attempt.
-        String username = mUserName.getText().toString();
-        String email = mEmailView.getText().toString();
-        String password = mPasswordView.getText().toString();
+        String username = mUserName.getText().toString().trim();
+        String email = mEmailView.getText().toString().trim();
+        String password = mPasswordView.getText().toString().trim();
 
         boolean cancel = false;
         View focusView = null;
@@ -157,8 +167,20 @@ public class SignUpActivity extends AppCompatActivity implements LoaderCallbacks
             // Show a progress spinner, and kick off a background task to
             // perform the user login attempt.
             showProgress(true);
-            mAuthTask = new UserLoginTask(username,email, password);
-            mAuthTask.execute((Void) null);
+           // mAuthTask = new UserLoginTask(username,email, password);
+            //mAuthTask.execute((Void) null);
+
+            firebaseAuth.createUserWithEmailAndPassword(email , password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                @Override
+                public void onComplete(@NonNull Task<AuthResult> task) {
+                    if(task.isSuccessful()){
+                        Toast.makeText(SignUpActivity.this, "Sign Up Successful!" ,Toast.LENGTH_LONG).show();
+                        startActivity(new Intent(SignUpActivity.this, MainActivity.class));
+                    }else{
+                        Toast.makeText(SignUpActivity.this, "Sign Up Failed!", Toast.LENGTH_LONG).show();
+                    }
+                }
+            });
         }
     }
 
@@ -169,7 +191,7 @@ public class SignUpActivity extends AppCompatActivity implements LoaderCallbacks
 
     private boolean isPasswordValid(String password) {
         //TODO: Replace this with your own logic
-        return password.length() > 4;
+        return password.length() > 6;
     }
 
     /**
@@ -248,6 +270,10 @@ public class SignUpActivity extends AppCompatActivity implements LoaderCallbacks
             case R.id.btnCreateAccount:
                 attemptLogin();
                 break;
+            case R.id.txtFinishSingIn:
+                finish();
+                startActivity(new Intent(SignUpActivity.this, LoginActivity.class));
+                break;
         }
     }
 
@@ -299,7 +325,6 @@ public class SignUpActivity extends AppCompatActivity implements LoaderCallbacks
               startActivity(intent);
               finish();
             } else {
-
                 mPasswordView.setError(getString(R.string.error_incorrect_password));
                 mPasswordView.requestFocus();
             }

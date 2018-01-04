@@ -5,8 +5,9 @@
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
     <string name="action_settings">Settings</string>
-    <string name="title_activity_login">Login</string>
+    <string name="title_activity_login">Log in</string>
     <string name="title_activity_signup">Sign up</string>
+    <string name="title_activity_SNS_login">SNS Log in</string>
 
     <!-- Strings related to login -->
     <string name="prompt_username">Username</string>
@@ -23,6 +24,7 @@
     </string>
     <string name="title_activity_maps">Map</string>
     <string name="title_activity_welcome">Instant Sale</string>
+    <string name="already_singin">Already have an account?</string>
 
     <!-- Splash Activity-->
 
@@ -37,9 +39,7 @@
     <string name="facebook_app_id">183599905534421</string>
     <string name="fb_login_protocol_scheme">fb183599905534421</string>
     <string name="server_client_id">128957781645-4tpn09of1jnvs4p2vctnkekh4ff5aa45.apps.googleusercontent.com</string>
-
-    <!--SignUp Activity-->
-    <string name="createAcount">CREATE ACCOUNT</string>
+    <string name="reset_password">Reset Password </string>
 
     <!--Map Activity -->
     <string name="default_info_title">Default Location</string>
@@ -52,5 +52,7 @@
 
     <!-- Messaing Activity -->
     <string name="title_activity_messaging">Messaging</string>
+    <string name="title_activity_main2">Main2Activity</string>
+    <string name="section_format">Hello World from section: %1$d</string>
 
 </resources>

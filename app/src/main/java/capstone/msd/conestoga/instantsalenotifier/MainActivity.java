@@ -2,12 +2,15 @@ package capstone.msd.conestoga.instantsalenotifier;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
+import android.support.design.widget.TabLayout;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.GravityCompat;
+import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AlertDialog;
@@ -21,14 +24,15 @@ import android.widget.ProgressBar;
 import java.util.ArrayList;
 
 import capstone.msd.conestoga.instantsalenotifier.category.CategoryFragment;
-import capstone.msd.conestoga.instantsalenotifier.dummy.DummyContent;
+import capstone.msd.conestoga.instantsalenotifier.coupons.CouponTabAdapter;
+import capstone.msd.conestoga.instantsalenotifier.coupons.CouponTabFragment;
 import capstone.msd.conestoga.instantsalenotifier.location.PermissionUtils;
 import capstone.msd.conestoga.instantsalenotifier.messaging.MessagingActivity;
 import capstone.msd.conestoga.instantsalenotifier.model.StoreCategory;
 
 public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener ,PermissionUtils.PermissionResultCallback, CategoryFragment.OnListFragmentInteractionListener{
-    private String TAG =MainActivity.class.getSimpleName();
+        implements NavigationView.OnNavigationItemSelectedListener, PermissionUtils.PermissionResultCallback, BaseFragment.OnFragmentInteractionListener {
+    private String TAG = MainActivity.class.getSimpleName();
 
     private ProgressBar progressBar;
     private static final int CODE_GET_REQUEST = 1024;
@@ -41,15 +45,6 @@ public class MainActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Catherine", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
-
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -58,6 +53,13 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        // Set up the ViewPager with the sections adapter.
+        ViewPager mViewPager = (ViewPager) findViewById(R.id.coupons_viewPager);
+        mViewPager.setAdapter(new CouponTabAdapter(getSupportFragmentManager()));
+
+        TabLayout tabLayout = (TabLayout) findViewById(R.id.coupon_tabs);
+        tabLayout.setupWithViewPager(mViewPager);
 
         progressBar = (ProgressBar) findViewById(R.id.progressBar);
     }
@@ -108,7 +110,7 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_home) {
-                    AlertDialog alertDialog = new AlertDialog.Builder(this)
+            AlertDialog alertDialog = new AlertDialog.Builder(this)
                     .setMessage("Do you want to get a NullPointerException, because that's how " +
                             "you get a NullPointerException :D")
                     .setPositiveButton("Why not?", new DialogInterface.OnClickListener() {
@@ -119,19 +121,22 @@ public class MainActivity extends AppCompatActivity
                     }).show();
 
         } else if (id == R.id.nav_messaging) {
-           startActivity(new Intent(this, MessagingActivity.class));
+            startActivity(new Intent(this, MessagingActivity.class));
         } else if (id == R.id.nav_category) {
             CategoryFragment categoryFragment = new CategoryFragment();
             FragmentManager mgrFragment = this.getSupportFragmentManager();
             mgrFragment.beginTransaction().replace(R.id.mainLayout, categoryFragment).commit();
 
         } else if (id == R.id.nav_coupons) {
+            CouponTabFragment couponFragment = new CouponTabFragment();
+            FragmentManager mgrFragment = this.getSupportFragmentManager();
+            mgrFragment.beginTransaction().replace(R.id.mainLayout, couponFragment).commit();
 
-        }  else if (id == R.id.nav_map) {
+        } else if (id == R.id.nav_map) {
             InstantSaleMapFragment mapFragment = new InstantSaleMapFragment();
             FragmentManager mgrFragment = this.getSupportFragmentManager();
             mgrFragment.beginTransaction().replace(R.id.mainLayout, mapFragment).commit();
-        }else if (id== R.id.nav_geoFence){
+        } else if (id == R.id.nav_geoFence) {
             GeoFencingSalesMapFragment geoFencingFragment = new GeoFencingSalesMapFragment();
             FragmentManager mgrFragment = this.getSupportFragmentManager();
             mgrFragment.beginTransaction().replace(R.id.mainLayout, geoFencingFragment).commit();
@@ -163,7 +168,7 @@ public class MainActivity extends AppCompatActivity
     }
 
     @Override
-    public void onListFragmentInteraction(StoreCategory storeCategory) {
+    public void onFragmentInteraction(Uri uri) {
 
     }
 }
