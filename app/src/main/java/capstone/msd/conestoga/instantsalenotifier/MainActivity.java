@@ -102,22 +102,30 @@ public class MainActivity extends AppCompatActivity
             UptownIntroFragment uptownIntroFragment = new UptownIntroFragment();
             FragmentManager mgrFragment = this.getSupportFragmentManager();
             mgrFragment.beginTransaction().replace(R.id.mainLayout, uptownIntroFragment).commit();
-        } else if (id == R.id.nav_messaging) {
-            startActivity(new Intent(this, MessagingActivity.class));
-        } else if (id == R.id.nav_category) {
-            CategoryFragment categoryFragment = new CategoryFragment();
+        }  else if (id == R.id.nav_map) {
+            InstantSaleMapFragment mapFragment = new InstantSaleMapFragment();
             FragmentManager mgrFragment = this.getSupportFragmentManager();
-            mgrFragment.beginTransaction().replace(R.id.mainLayout, categoryFragment).commit();
-
+            mgrFragment.beginTransaction().replace(R.id.mainLayout, mapFragment).commit();
         } else if (id == R.id.nav_coupons) {
             StoreSalesFragment storeSalesFragment = new StoreSalesFragment();
             FragmentManager mgrFragment = this.getSupportFragmentManager();
             mgrFragment.beginTransaction().replace(R.id.mainLayout, storeSalesFragment).commit();
-
-        } else if (id == R.id.nav_map) {
-            InstantSaleMapFragment mapFragment = new InstantSaleMapFragment();
+        } else if (id == R.id.nav_category) {
+            CategoryFragment categoryFragment = new CategoryFragment();
             FragmentManager mgrFragment = this.getSupportFragmentManager();
-            mgrFragment.beginTransaction().replace(R.id.mainLayout, mapFragment).commit();
+            mgrFragment.beginTransaction().replace(R.id.mainLayout, categoryFragment).commit();
+        }  else if (id == R.id.nav_messaging) {
+            //startActivity(new Intent(this, MessagingActivity.class));
+            SendMessagingFragment messagingFragment = new SendMessagingFragment();
+            FragmentManager mgrFragment = this.getSupportFragmentManager();
+            mgrFragment.beginTransaction().replace(R.id.mainLayout, messagingFragment).commit();
+
+        } else if (id == R.id.nav_settings) {
+            //startActivity(new Intent(this, MessagingActivity.class));
+            SettingsFragment settingsFragment = new SettingsFragment();
+            FragmentManager mgrFragment = this.getSupportFragmentManager();
+            mgrFragment.beginTransaction().replace(R.id.mainLayout, settingsFragment).commit();
+
         } else if (id == R.id.nav_geoFence) {
             GeoFencingSalesMapFragment geoFencingFragment = new GeoFencingSalesMapFragment();
             FragmentManager mgrFragment = this.getSupportFragmentManager();

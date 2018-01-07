@@ -3,15 +3,42 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="horizontal">
+    android:orientation="vertical"
+    android:weightSum="10">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:weightSum="1">
+
+        <TextView
+            android:id="@+id/textView2"
+            style="@style/TitleTextStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Local"
+            android:textColor="@color/categoryDeepGreeen"
+            android:textStyle="italic" />
+
+        <TextView
+            android:id="@+id/subtitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Style"
+            style="@style/TitleTextStyle"
+            android:layout_marginLeft="10dp"
+            android:textColor="@color/categoryDeepRed" />
+    </LinearLayout>
 
     <ImageView
         android:id="@+id/imgUptown"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:layout_gravity="center"
+        android:layout_weight="9"
         android:adjustViewBounds="true"
         android:scaleType="fitXY"
-        app:srcCompat="@mipmap/ic_launcher"
-        android:layout_weight="1" />
+        app:srcCompat="@mipmap/ic_launcher" />
 </LinearLayout>

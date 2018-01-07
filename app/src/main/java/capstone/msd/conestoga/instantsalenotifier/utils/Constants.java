@@ -12,9 +12,11 @@ import capstone.msd.conestoga.instantsalenotifier.R;
 
 public class Constants {
     //Database Information
-    public static final String ROOT_URL = "http://instantsalenotifier.store/Final project/Api.php?apicall=";
+    public static final String BASE_URL = "http://instantsalenotifier.store/Final project/";
+    public static final String ROOT_URL =  BASE_URL +"Api.php?apicall=";
     public static final String URL_GET_STORES= ROOT_URL + "getstores";
     public static final String URL_POST_TOKEN= ROOT_URL + "insertFcmToken";
+    public static final String URL_SEND_NOFITICATION =  BASE_URL+"Send_notification.html";
 
     public static final int CODE_GET_REQUEST = 1024;
     public static final int CODE_POST_REQUEST = 1025;
@@ -46,5 +48,6 @@ public class Constants {
             R.drawable.uptownwaterloo_08, R.drawable.uptownwaterloo_11,
             R.drawable.uptownwaterloo_17
     };
+    public static final String[] uptownWaterlooTitle={   "Culture","Life", "Style", "Beauty","Taste","Innovation", "Knowledge"    };
 
 }

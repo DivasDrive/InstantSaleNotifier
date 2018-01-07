@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import capstone.msd.conestoga.instantsalenotifier.utils.Constants;
 
@@ -46,6 +47,8 @@ public class ViewPagerAdapter extends PagerAdapter {
         View view = layoutInflater.inflate(R.layout.uptown_intro_layout, null);
         ImageView imageView = (ImageView)view.findViewById(R.id.imgUptown);
         imageView.setImageResource(Constants.uptownWaterlooImages[position]);
+        TextView txtSubTitle = (TextView)view.findViewById(R.id.subtitle);
+        txtSubTitle.setText(Constants.uptownWaterlooTitle[position]);
 
         vp = (ViewPager)container;
         vp.addView(view,0);
