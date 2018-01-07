@@ -55,4 +55,7 @@
     <string name="title_activity_main2">Main2Activity</string>
     <string name="section_format">Hello World from section: %1$d</string>
 
+    <!-- SaleInfo Fragment -->
+    <string name="title_sale">Sales</string>
+    <string name="title_store_name">Store Name</string>
 </resources>

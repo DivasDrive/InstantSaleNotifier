@@ -12,8 +12,12 @@ import capstone.msd.conestoga.instantsalenotifier.R;
 
 public class Constants {
     //Database Information
-    private static final String ROOT_URL = "http://aashritha.000webhostapp.com/InstantSaleNotifier/Api.php?apicall=";
+    public static final String ROOT_URL = "http://instantsalenotifier.store/Final project/Api.php?apicall=";
     public static final String URL_GET_STORES= ROOT_URL + "getstores";
+    public static final String URL_POST_TOKEN= ROOT_URL + "insertFcmToken";
+
+    public static final int CODE_GET_REQUEST = 1024;
+    public static final int CODE_POST_REQUEST = 1025;
 
     // Google Map
     public static final String GEOFENCE_ID_CONESTOGA_COLLEGE = "Conestoga College";
@@ -36,6 +40,11 @@ public class Constants {
             "#CDDEB5", "#00BFA5",
             "#8C3283", "#22741C",
             "#FFA000", "#303F9F"
+    };
+    public static final int[] uptownWaterlooImages={   R.drawable.uptownwaterloo_01, R.drawable.uptownwaterloo_03,
+            R.drawable.uptownwaterloo_06, R.drawable.uptownwaterloo_07,
+            R.drawable.uptownwaterloo_08, R.drawable.uptownwaterloo_11,
+            R.drawable.uptownwaterloo_17
     };
 
 }

@@ -5,17 +5,29 @@ package capstone.msd.conestoga.instantsalenotifier.model;
  */
 
 public class SaleInfo {
-    private String name;
 
-    public SaleInfo(String name) {
-        this.name = name;
+    private String id;
+    private String title;
+
+    public SaleInfo(  String title) {
+
+        this.title = title;
+    }
+    public String getId() {
+        return id;
     }
 
-    public String getName() {
-        return name;
+    public void setId(String id) {
+        this.id = id;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public String getTitle() {
+        return title;
     }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+
 }

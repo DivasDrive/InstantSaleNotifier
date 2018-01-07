@@ -4,13 +4,9 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
-import android.support.design.widget.Snackbar;
-import android.support.design.widget.TabLayout;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.GravityCompat;
-import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AlertDialog;
@@ -18,25 +14,20 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.ProgressBar;
 
 import java.util.ArrayList;
 
 import capstone.msd.conestoga.instantsalenotifier.category.CategoryFragment;
-import capstone.msd.conestoga.instantsalenotifier.coupons.CouponTabAdapter;
-import capstone.msd.conestoga.instantsalenotifier.coupons.CouponTabFragment;
+import capstone.msd.conestoga.instantsalenotifier.coupons.StoreSalesFragment;
 import capstone.msd.conestoga.instantsalenotifier.location.PermissionUtils;
 import capstone.msd.conestoga.instantsalenotifier.messaging.MessagingActivity;
-import capstone.msd.conestoga.instantsalenotifier.model.StoreCategory;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, PermissionUtils.PermissionResultCallback, BaseFragment.OnFragmentInteractionListener {
     private String TAG = MainActivity.class.getSimpleName();
 
     private ProgressBar progressBar;
-    private static final int CODE_GET_REQUEST = 1024;
-    private static final int CODE_POST_REQUEST = 1025;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,12 +45,10 @@ public class MainActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        // Set up the ViewPager with the sections adapter.
-        ViewPager mViewPager = (ViewPager) findViewById(R.id.coupons_viewPager);
-        mViewPager.setAdapter(new CouponTabAdapter(getSupportFragmentManager()));
-
-        TabLayout tabLayout = (TabLayout) findViewById(R.id.coupon_tabs);
-        tabLayout.setupWithViewPager(mViewPager);
+        //Google Map
+        InstantSaleMapFragment mapFragment = new InstantSaleMapFragment();
+        FragmentManager mgrFragment = this.getSupportFragmentManager();
+        mgrFragment.beginTransaction().replace(R.id.mainLayout, mapFragment).commit();
 
         progressBar = (ProgressBar) findViewById(R.id.progressBar);
     }
@@ -109,17 +98,10 @@ public class MainActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_home) {
-            AlertDialog alertDialog = new AlertDialog.Builder(this)
-                    .setMessage("Do you want to get a NullPointerException, because that's how " +
-                            "you get a NullPointerException :D")
-                    .setPositiveButton("Why not?", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            throw new NullPointerException("Test issue in Instabug Sample app");
-                        }
-                    }).show();
-
+        if (id == R.id.nav_uptownwaterloo) {
+            UptownIntroFragment uptownIntroFragment = new UptownIntroFragment();
+            FragmentManager mgrFragment = this.getSupportFragmentManager();
+            mgrFragment.beginTransaction().replace(R.id.mainLayout, uptownIntroFragment).commit();
         } else if (id == R.id.nav_messaging) {
             startActivity(new Intent(this, MessagingActivity.class));
         } else if (id == R.id.nav_category) {
@@ -128,9 +110,9 @@ public class MainActivity extends AppCompatActivity
             mgrFragment.beginTransaction().replace(R.id.mainLayout, categoryFragment).commit();
 
         } else if (id == R.id.nav_coupons) {
-            CouponTabFragment couponFragment = new CouponTabFragment();
+            StoreSalesFragment storeSalesFragment = new StoreSalesFragment();
             FragmentManager mgrFragment = this.getSupportFragmentManager();
-            mgrFragment.beginTransaction().replace(R.id.mainLayout, couponFragment).commit();
+            mgrFragment.beginTransaction().replace(R.id.mainLayout, storeSalesFragment).commit();
 
         } else if (id == R.id.nav_map) {
             InstantSaleMapFragment mapFragment = new InstantSaleMapFragment();

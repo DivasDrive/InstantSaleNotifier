@@ -1,7 +1,7 @@
 package capstone.msd.conestoga.instantsalenotifier;
 
-
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationListener;
@@ -11,10 +11,12 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
@@ -38,6 +40,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import capstone.msd.conestoga.instantsalenotifier.category.CategoryFragment;
+import capstone.msd.conestoga.instantsalenotifier.coupons.StoreSalesFragment;
 import capstone.msd.conestoga.instantsalenotifier.database.DataBaseConnection;
 import capstone.msd.conestoga.instantsalenotifier.database.RequestHandler;
 import capstone.msd.conestoga.instantsalenotifier.location.PermissionUtils;
@@ -51,10 +55,8 @@ import static com.facebook.FacebookSdk.getApplicationContext;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class InstantSaleMapFragment extends Fragment implements OnMapReadyCallback, LocationListener {
+public class InstantSaleMapFragment extends Fragment implements OnMapReadyCallback, LocationListener , GoogleMap.OnMarkerClickListener {
     private String TAG = InstantSaleMapFragment.class.getSimpleName();
-    private static final int CODE_GET_REQUEST = 1024;
-    private static final int CODE_POST_REQUEST = 1025;
 
     private GoogleMap mMap;
     private FusedLocationProviderClient mFusedLocationProviderClient = null;
@@ -67,6 +69,7 @@ public class InstantSaleMapFragment extends Fragment implements OnMapReadyCallba
     private LatLng latLng;
     private double current_latitude;
     private double current_longitude;
+
 
     public InstantSaleMapFragment() {
     }
@@ -116,6 +119,12 @@ public class InstantSaleMapFragment extends Fragment implements OnMapReadyCallba
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
+        mMap.setMapType(GoogleMap.MAP_TYPE_HYBRID);
+        mMap.setTrafficEnabled(true);
+        mMap.setIndoorEnabled(true);
+        mMap.setBuildingsEnabled(true);
+        mMap.getUiSettings().setZoomControlsEnabled(true);
+
         // Add a marker in "UpTown Waterloo Business Improvement Area" and move the camera
         // UpTown Waterloo Business Improvement Area ::
        //  Suite 160, 100 Regina Street South     Waterloo, Ontario, N2J 4P9
@@ -162,6 +171,7 @@ public class InstantSaleMapFragment extends Fragment implements OnMapReadyCallba
                 Toast.makeText(getApplicationContext(),marker.getTitle(), Toast.LENGTH_SHORT).show();
             }
         });
+        mMap.setOnMarkerClickListener(this);
     }
 
     @Override
@@ -179,7 +189,7 @@ public class InstantSaleMapFragment extends Fragment implements OnMapReadyCallba
 
     }
     private void requestStoreInfomation(){
-        PerformNetworkRequest request = new PerformNetworkRequest(Constants.URL_GET_STORES, null, CODE_GET_REQUEST);
+        PerformNetworkRequest request = new PerformNetworkRequest(Constants.URL_GET_STORES, null, Constants.CODE_GET_REQUEST);
         request.execute();
     }
 
@@ -213,6 +223,18 @@ public class InstantSaleMapFragment extends Fragment implements OnMapReadyCallba
             connectionUtil.close();
         }
     }
+
+    @Override
+    public boolean onMarkerClick(Marker marker) {
+        Toast.makeText(getContext(), marker.getTitle(), Toast.LENGTH_LONG).show();
+
+        StoreSalesFragment storeSalesFragment = new StoreSalesFragment();
+        FragmentManager mgrFragment = getActivity().getSupportFragmentManager();
+        mgrFragment.beginTransaction().replace(R.id.mainLayout, storeSalesFragment).commit();
+        return false;
+    }
+
+
     //inner class to perform network request extending an AsyncTask
     private class PerformNetworkRequest extends AsyncTask<Void, Void, String> {
 
@@ -259,6 +281,7 @@ public class InstantSaleMapFragment extends Fragment implements OnMapReadyCallba
             } catch (JSONException e) {
                 e.printStackTrace();
             }
+
         }
 
         //the network operation will be performed in background
@@ -266,11 +289,11 @@ public class InstantSaleMapFragment extends Fragment implements OnMapReadyCallba
         protected String doInBackground(Void... voids) {
             RequestHandler requestHandler = new RequestHandler();
 
-            if (requestCode == CODE_POST_REQUEST)
+            if (requestCode == Constants.CODE_POST_REQUEST)
                 return requestHandler.sendPostRequest(url, params);
 
 
-            if (requestCode == CODE_GET_REQUEST)
+            if (requestCode == Constants.CODE_GET_REQUEST)
                 return requestHandler.sendGetRequest(url);
 
             return null;
@@ -301,8 +324,8 @@ public class InstantSaleMapFragment extends Fragment implements OnMapReadyCallba
        /* for (int i = 0; i < storeArrayList.size(); i++) {
             Log.d(TAG, storeArrayList.get(i).getName());
             Log.d(TAG, String.valueOf(storeArrayList.get(i).getLantitude()));
-        }*/
-
+        }
+*/
         //creating the adapter and setting it to the listview
         // HeroAdapter adapter = new HeroAdapter(heroList);
         // listView.setAdapter(adapter);

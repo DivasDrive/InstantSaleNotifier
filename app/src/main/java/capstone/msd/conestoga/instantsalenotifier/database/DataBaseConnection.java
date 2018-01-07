@@ -16,11 +16,10 @@ import java.sql.SQLException;
 public class DataBaseConnection {
     private String TAG="DataBaseConnection";
     private String className="com.mysql.jdbc.Driver";
-    private String  url ="jdbc:mysql://aashritha.000webhostapp.com/instantsalenotifier";
-    private String userId ="id123076_instantsalenotifier";
-    private String password ="aashu1991";
+    private String  url ="jdbc:mysql://instantsalenotifier.store//u977313281_insta";
+    private String userId ="u977313281_insta";
+    private String password ="aashu@1991";
     private Connection conn = null;
-
 
 
     public DataBaseConnection(){
