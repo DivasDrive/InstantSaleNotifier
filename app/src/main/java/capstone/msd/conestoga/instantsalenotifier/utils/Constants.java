@@ -15,8 +15,10 @@ public class Constants {
     public static final String BASE_URL = "http://instantsalenotifier.store/Final project/";
     public static final String ROOT_URL =  BASE_URL +"Api.php?apicall=";
     public static final String URL_GET_STORES= ROOT_URL + "getstores";
+    public static final String URL_GET_STORES_INFO= ROOT_URL + "getStoreInfo";
     public static final String URL_POST_TOKEN= ROOT_URL + "insertFcmToken";
-    public static final String URL_SEND_NOFITICATION =  BASE_URL+"Send_notification.html";
+    //public static final String URL_SEND_NOFITICATION =  BASE_URL+"Send_notification.html";
+    public static final String URL_SEND_NOFITICATION =  BASE_URL+"push.php";
 
     public static final int CODE_GET_REQUEST = 1024;
     public static final int CODE_POST_REQUEST = 1025;
@@ -25,6 +27,10 @@ public class Constants {
     public static final String GEOFENCE_ID_CONESTOGA_COLLEGE = "Conestoga College";
     public static final float GEOFENCE_RADIUS_IN_METERS = 100;
 
+    //Store Key
+    public static final String STORE_TITLE = "StoreName";
+
+
     public static final int[] gridTitleColor_ID ={
             R.color.colorAccent, R.color.categoryLightBlue,
             R.color.categoryMaterialYellow, R.color.categoryDeepBlue,
@@ -32,7 +38,8 @@ public class Constants {
             R.color.categoryDeepRed, R.color.categoryLightPink,
             R.color.categoryLightGreen, R.color.categoryMaterialGreen,
             R.color.categoryDeepPurple, R.color.darkGreen,
-            R.color.categoryLightOrange, R.color.colorPrimaryDark
+            R.color.categoryLightOrange, R.color.colorPrimaryDark,
+            R.color.colorAccent, R.color.categoryLightBlue
     };
     public static final String[] gridTitleColor ={
             "#FF4081", "#7C4DFF",

@@ -11,6 +11,7 @@
     <!-- Menu (Map)-->
     <color name="lightGray">#AEAEAE</color>
     <color name="darkGray">#6E6E6E</color>
+    <color name="bg_gray">#EAEAEA</color>
     <!--Category-->
     <color name="categoryPrimaryColor">#FFC107</color>
     <color name="categoryLightOrange">#FFA000</color>

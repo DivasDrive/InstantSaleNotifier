@@ -11,9 +11,9 @@
             android:icon="@drawable/ic_store_black_24dp"
             android:title="Stores" />
         <item
-            android:id="@+id/nav_coupons"
+            android:id="@+id/nav_sales"
             android:icon="@drawable/ic_card_giftcard_black_24dp"
-            android:title="Coupons" />
+            android:title="SALES" />
 
         <item
             android:id="@+id/nav_category"
@@ -23,20 +23,23 @@
         <item
             android:id="@+id/nav_messaging"
             android:icon="@drawable/ic_notifications_active_black_24dp"
-            android:title="Messaging" />
+            android:title="Messaging"/>
 
         <item
             android:id="@+id/nav_settings"
             android:icon="@drawable/ic_settings_black_24dp"
-            android:title="Settings" />
+            android:title="Settings"
+            android:visible="false"/>
         <item
             android:id="@+id/nav_logout"
             android:icon="@drawable/ic_logout_black_24dp"
-            android:title="Log Out" />
+            android:title="Log Out"
+            android:visible="false"/>
         <item
             android:id="@+id/nav_rewards"
             android:icon="@drawable/ic_attach_money_black_24dp"
-            android:title="My Rewards" />
+            android:title="My Rewards"
+            android:visible="false"/>
 
         <item
             android:id="@+id/nav_geoFence"

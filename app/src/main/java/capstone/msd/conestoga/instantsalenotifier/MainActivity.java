@@ -1,7 +1,5 @@
 package capstone.msd.conestoga.instantsalenotifier;
 
-import android.content.DialogInterface;
-import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
@@ -9,7 +7,6 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
@@ -19,9 +16,9 @@ import android.widget.ProgressBar;
 import java.util.ArrayList;
 
 import capstone.msd.conestoga.instantsalenotifier.category.CategoryFragment;
-import capstone.msd.conestoga.instantsalenotifier.coupons.StoreSalesFragment;
+import capstone.msd.conestoga.instantsalenotifier.sales.StoreSalesFragment;
 import capstone.msd.conestoga.instantsalenotifier.location.PermissionUtils;
-import capstone.msd.conestoga.instantsalenotifier.messaging.MessagingActivity;
+import capstone.msd.conestoga.instantsalenotifier.uptown.UptownIntroFragment;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, PermissionUtils.PermissionResultCallback, BaseFragment.OnFragmentInteractionListener {
@@ -106,7 +103,7 @@ public class MainActivity extends AppCompatActivity
             InstantSaleMapFragment mapFragment = new InstantSaleMapFragment();
             FragmentManager mgrFragment = this.getSupportFragmentManager();
             mgrFragment.beginTransaction().replace(R.id.mainLayout, mapFragment).commit();
-        } else if (id == R.id.nav_coupons) {
+        } else if (id == R.id.nav_sales) {
             StoreSalesFragment storeSalesFragment = new StoreSalesFragment();
             FragmentManager mgrFragment = this.getSupportFragmentManager();
             mgrFragment.beginTransaction().replace(R.id.mainLayout, storeSalesFragment).commit();

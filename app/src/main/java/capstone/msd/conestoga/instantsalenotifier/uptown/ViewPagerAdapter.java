@@ -1,4 +1,4 @@
-package capstone.msd.conestoga.instantsalenotifier;
+package capstone.msd.conestoga.instantsalenotifier.uptown;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import capstone.msd.conestoga.instantsalenotifier.R;
 import capstone.msd.conestoga.instantsalenotifier.utils.Constants;
 
 /**

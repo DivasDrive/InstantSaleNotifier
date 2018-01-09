@@ -3,31 +3,32 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:padding="10dp"
     android:weightSum="10"
-    android:orientation="vertical">
+    android:background="@color/bg_gray">
+
 
     <TextView
-        android:id="@+id/textView3"
+        android:id="@+id/storeTitle"
+        style="@style/SubTitleTextStyle"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_gravity="center_vertical"
         android:layout_weight="1"
-        android:gravity="center"
         android:text="@string/title_sale"
-        android:textColor="@color/colorPrimaryDark"
-        android:textSize="32sp"
-        android:textStyle="bold" />
+        android:textAlignment="center"
+        android:textColor="@color/categoryDeepGreeen" />
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/listRecyclerView"
-        android:name="capstone.msd.conestoga.instantsalenotifier.CategoryFragment"
+        android:name="capstone.msd.conestoga.instantsalenotifier.sales.StoreSalesFragment"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"
+        android:layout_margin="10dp"
         android:layout_weight="9"
         app:layoutManager="LinearLayoutManager"
-        tools:context="capstone.msd.conestoga.instantsalenotifier.category.CategoryFragment"
-        tools:listitem="@layout/fragment_category_list_item" />
+        tools:context="capstone.msd.conestoga.instantsalenotifier.sales.StoreSalesFragment"
+        tools:listitem="@layout/sales_list_item" />
 </LinearLayout>

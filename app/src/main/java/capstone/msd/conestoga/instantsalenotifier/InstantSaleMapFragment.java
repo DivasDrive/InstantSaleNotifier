@@ -1,7 +1,6 @@
 package capstone.msd.conestoga.instantsalenotifier;
 
 import android.content.Context;
-import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationListener;
@@ -16,7 +15,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
@@ -40,8 +38,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import capstone.msd.conestoga.instantsalenotifier.category.CategoryFragment;
-import capstone.msd.conestoga.instantsalenotifier.coupons.StoreSalesFragment;
+import capstone.msd.conestoga.instantsalenotifier.sales.StoreSalesFragment;
 import capstone.msd.conestoga.instantsalenotifier.database.DataBaseConnection;
 import capstone.msd.conestoga.instantsalenotifier.database.RequestHandler;
 import capstone.msd.conestoga.instantsalenotifier.location.PermissionUtils;
@@ -189,39 +186,8 @@ public class InstantSaleMapFragment extends Fragment implements OnMapReadyCallba
 
     }
     private void requestStoreInfomation(){
-        PerformNetworkRequest request = new PerformNetworkRequest(Constants.URL_GET_STORES, null, Constants.CODE_GET_REQUEST);
+        PerformNetworkRequest request = new PerformNetworkRequest(Constants.URL_GET_STORES_INFO, null, Constants.CODE_GET_REQUEST);
         request.execute();
-    }
-
-    private void getDataFromDatabase(){
-
-        Log.d (TAG, "getDataFromDatabase");
-        connectionUtil = new DataBaseConnection();
-        conn = connectionUtil.getConnection();
-        String selectSQL ="SELECT NAME FROM STORES ";
-        PreparedStatement pstmt =null;
-
-        try {
-            if (conn != null) {
-                pstmt = conn.prepareStatement(selectSQL);
-                ResultSet  rs =  pstmt.executeQuery();
-                while(rs.next()){
-                    Log.d(TAG, rs.getString(1));
-                }
-            }else {
-                Toast.makeText(getApplicationContext(), "Connection Fail",Toast.LENGTH_LONG).show();
-            }
-        }catch(SQLException e){
-            Log.e(TAG, e.getMessage());
-        }finally {
-            if(pstmt != null)
-                try {
-                    pstmt.close();
-                } catch (SQLException e) {
-                    Log.e(TAG, e.getMessage() );
-                }
-            connectionUtil.close();
-        }
     }
 
     @Override
@@ -229,6 +195,9 @@ public class InstantSaleMapFragment extends Fragment implements OnMapReadyCallba
         Toast.makeText(getContext(), marker.getTitle(), Toast.LENGTH_LONG).show();
 
         StoreSalesFragment storeSalesFragment = new StoreSalesFragment();
+        Bundle args = new Bundle();
+        args.putString(Constants.STORE_TITLE, marker.getTitle());
+        storeSalesFragment.setArguments(args);
         FragmentManager mgrFragment = getActivity().getSupportFragmentManager();
         mgrFragment.beginTransaction().replace(R.id.mainLayout, storeSalesFragment).commit();
         return false;
@@ -300,26 +269,31 @@ public class InstantSaleMapFragment extends Fragment implements OnMapReadyCallba
         }
     }
     private void refreshStoreList(JSONArray stores) throws JSONException {
-        //clearing previous heroes
-        // heroList.clear();
         ArrayList<Store> storeArrayList = new ArrayList<>();
+        Log.d(TAG, "stores.length() :" + stores.length());
 
         //traversing through all the items in the json array
         //the json we got from the response
         for (int i = 0; i < stores.length(); i++) {
-            //getting each hero object
+
             JSONObject obj = stores.getJSONObject(i);
 
             //adding the hero to the list
             storeArrayList.add(new Store(
                     obj.getInt("id"),
-                    obj.getString("name"),
+                    obj.getString("storeName"),
+                    obj.getString("emailAddress"),
+                    obj.getString("phoneNumber"),
                     obj.getString("address"),
+                    obj.getString("city"),
+                    obj.getString("province"),
+                    obj.getString("postalCode"),
                     obj.getDouble("lantitude"),
                     obj.getDouble("longtitude")
             ));
+
             latLng = new LatLng(obj.getDouble("lantitude"), obj.getDouble("longtitude"));
-            addMarker(latLng,obj.getString("name"));
+            addMarker(latLng,obj.getString("storeName"));
         }
        /* for (int i = 0; i < storeArrayList.size(); i++) {
             Log.d(TAG, storeArrayList.get(i).getName());

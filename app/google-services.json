@@ -1,43 +1,27 @@
 {
   "project_info": {
-    "project_number": "128957781645",
-    "firebase_url": "https://temporal-data-164215.firebaseio.com",
-    "project_id": "temporal-data-164215",
-    "storage_bucket": "temporal-data-164215.appspot.com"
+    "project_number": "140420755287",
+    "firebase_url": "https://instantsalenotifier.firebaseio.com",
+    "project_id": "instantsalenotifier",
+    "storage_bucket": "instantsalenotifier.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:128957781645:android:92b12e6f8b56402a",
+        "mobilesdk_app_id": "1:140420755287:android:92b12e6f8b56402a",
         "android_client_info": {
           "package_name": "capstone.msd.conestoga.instantsalenotifier"
         }
       },
       "oauth_client": [
         {
-          "client_id": "128957781645-puqfulshsv7v282e28rt068jjltt9cdb.apps.googleusercontent.com",
-          "client_type": 3
-        },
-        {
-          "client_id": "128957781645-4tpn09of1jnvs4p2vctnkekh4ff5aa45.apps.googleusercontent.com",
-          "client_type": 3
-        },
-        {
-          "client_id": "128957781645-j16tvuggfhdvsbo7jpc9jei3ud2gam1i.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "capstone.msd.conestoga.instantsalenotifier",
-            "certificate_hash": "258968f01d777ea3e3c4c220c703b785662f8dfb"
-          }
-        },
-        {
-          "client_id": "128957781645-edsk4mqouvvoi333uv397h57qlc1200v.apps.googleusercontent.com",
+          "client_id": "140420755287-j04svcb4e5emja5htanc9co4m30tsttb.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyBtY4gEVCuYuFNq6oVzGMJjrTqzgvua32c"
+          "current_key": "AIzaSyCjPioChTAifX_NSy92U59Fu4XVGevf6n4"
         }
       ],
       "services": {
@@ -45,13 +29,8 @@
           "status": 1
         },
         "appinvite_service": {
-          "status": 2,
-          "other_platform_oauth_client": [
-            {
-              "client_id": "128957781645-puqfulshsv7v282e28rt068jjltt9cdb.apps.googleusercontent.com",
-              "client_type": 3
-            }
-          ]
+          "status": 1,
+          "other_platform_oauth_client": []
         },
         "ads_service": {
           "status": 2

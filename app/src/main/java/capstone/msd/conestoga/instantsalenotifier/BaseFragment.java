@@ -82,13 +82,14 @@ public class BaseFragment extends Fragment {
     public void onAttach(Activity activity) {
         super.onAttach(activity);
         if(Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP_MR1) return;
-/*
-        if (activity instanceof BaseFragment.OnListFragmentInteractionListener) {
-            mListener = (BaseFragment.OnListFragmentInteractionListener) activity;
+ /*
+        if (activity instanceof OnListFragmentInteractionListener) {
+            mListener = ( OnListFragmentInteractionListener) activity;
         } else {
             throw new RuntimeException(activity.toString()
                     + " must implement OnListFragmentInteractionListener");
-        }*/
+        }
+        */
     }
     @Override
     public void onAttach(Context context) {

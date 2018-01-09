@@ -1,4 +1,4 @@
-package capstone.msd.conestoga.instantsalenotifier.coupons;
+package capstone.msd.conestoga.instantsalenotifier.sales;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -10,26 +10,24 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
+import capstone.msd.conestoga.instantsalenotifier.BaseFragment;
 import capstone.msd.conestoga.instantsalenotifier.R;
 import capstone.msd.conestoga.instantsalenotifier.model.SaleInfo;
+import capstone.msd.conestoga.instantsalenotifier.utils.Constants;
 
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * A fragment representing a list of Items.
- * <p/>
- * Activities containing this fragment MUST implement the {@link OnListFragmentInteractionListener}
- * interface.
- */
-public class StoreSalesFragment extends Fragment {
+
+public class StoreSalesFragment extends BaseFragment {
     private String TAG = StoreSalesFragment.class.getSimpleName();
     // TODO: Customize parameter argument names
     private static final String ARG_COLUMN_COUNT = "column-count";
     // TODO: Customize parameters
     private int mColumnCount = 1;
-    private OnListFragmentInteractionListener mListener;
+    private String strStoreTitle = "Instant SALES";
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
@@ -60,12 +58,16 @@ public class StoreSalesFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_storesales_list, container, false);
+        View view = inflater.inflate(R.layout.fragment_sale_list, container, false);
+        View listView  = (RecyclerView)view.findViewById(R.id.listRecyclerView);
+        TextView txtStoreTitle = (TextView)view.findViewById(R.id.storeTitle);
+        strStoreTitle =getArguments().getString(Constants.STORE_TITLE,"SALES");
+        txtStoreTitle.setText(strStoreTitle  );
 
         // Set the adapter
-        if (view instanceof RecyclerView) {
+        if (listView instanceof RecyclerView) {
             Context context = view.getContext();
-            RecyclerView recyclerView = (RecyclerView) view;
+            RecyclerView recyclerView = (RecyclerView) listView;
             if (mColumnCount <= 1) {
                 recyclerView.setLayoutManager(new LinearLayoutManager(context));
             } else {
@@ -78,8 +80,8 @@ public class StoreSalesFragment extends Fragment {
         return view;
     }
     private List<SaleInfo> getSaleInfoList() {
-        String[] saleTile = new String[]{"Arts & Cultures", "Beauty", "Beer, Wine & Alchol", "Books", "Children & Baby", "Clothing & Accessories", "Eye Care", "Fitness & Sports", "Gifts, Stationary & Flowers", "Grocery & Specialty Food", "Home Furnishing & Interior", "Jewellers", "Music", "Variety & Specialty Shops"};
-        int[] saleImageList = new int[]{R.drawable.electronics, R.drawable.entertainment, R.drawable.fashion, R.drawable.finance_insurance, R.drawable.lifestyle, R.drawable.motoring, R.drawable.other, R.drawable.travel, R.drawable.lifestyle, R.drawable.motoring, R.drawable.finance_insurance, R.drawable.fashion, R.drawable.electronics, R.drawable.entertainment, R.drawable.electronics};
+        String[] saleTile = new String[]{"Arts & Cultures", "Beauty", "Beer, Wine & Alchol", "Books", "Children & Baby", "Clothing & Accessories", "Eye Care", "Fitness & Sports", "Gifts, Stationary & Flowers", "Grocery & Specialty Food", "Home Furnishing & Interior", "Jewellers", "Music", "Variety & Specialty Shops","Accommodations","Advertising & Marketing Services"};
+        int[] saleImageList = new int[]{R.drawable.electronics, R.drawable.entertainment, R.drawable.fashion, R.drawable.finance_insurance, R.drawable.lifestyle, R.drawable.motoring, R.drawable.other, R.drawable.travel, R.drawable.lifestyle, R.drawable.motoring, R.drawable.finance_insurance, R.drawable.fashion, R.drawable.electronics, R.drawable.entertainment, R.drawable.electronics,R.drawable.entertainment, R.drawable.fashion};
 
         List<SaleInfo> saleInfoList = new ArrayList<SaleInfo>();
 
@@ -92,37 +94,10 @@ public class StoreSalesFragment extends Fragment {
         return saleInfoList;
     }
 
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        /*
-        if (context instanceof OnListFragmentInteractionListener) {
-            mListener = (OnListFragmentInteractionListener) context;
-        } else {
-            throw new RuntimeException(context.toString()
-                    + " must implement OnListFragmentInteractionListener");
-        }
-        */
-    }
+
 
     @Override
     public void onDetach() {
         super.onDetach();
-        mListener = null;
-    }
-
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p/>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
-    public interface OnListFragmentInteractionListener {
-        // TODO: Update argument type and name
-        void onListFragmentInteraction( );
     }
 }
