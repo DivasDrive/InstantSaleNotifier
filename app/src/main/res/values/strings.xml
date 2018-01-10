@@ -58,4 +58,11 @@
     <!-- SaleInfo Fragment -->
     <string name="title_sale">Sales</string>
     <string name="title_store_name">Store Name</string>
+
+    <!-- GeoFence Error -->
+    <string name="geofence_not_available">GEOFENCE_NOT_AVAILABLE</string>
+    <string name="geofence_too_many_geofences">GEOFENCE_TOO_MANY_GEOFENCES</string>
+    <string name="geofence_too_many_pending_intents">GEOFENCE_TOO_MANY_PENDING_INTENTS</string>
+    <string name="unknown_geofence_error">GEOFENCE_UNKNOWN_ERROR</string>
+
 </resources>

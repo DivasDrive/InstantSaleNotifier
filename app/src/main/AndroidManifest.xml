@@ -133,6 +133,9 @@
                 <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
             </intent-filter>
         </service>
+        <!--GeoFence Registration Service :: Listen for geofence transitions -->
+        <service android:name=".location.GeofenceRegistrationService"/>
+
     </application>
 
 </manifest>

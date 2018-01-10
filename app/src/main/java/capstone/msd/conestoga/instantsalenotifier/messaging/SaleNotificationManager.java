@@ -7,6 +7,8 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.BitmapFactory;
+import android.media.RingtoneManager;
+import android.net.Uri;
 import android.support.v4.app.NotificationCompat;
 
 import com.google.firebase.messaging.RemoteMessage;
@@ -27,6 +29,7 @@ public class SaleNotificationManager {
         this.mContext = pContext;
     }
     public void showNotification(String from, String notification, Intent intent){
+
         PendingIntent pendingIntent = PendingIntent.getActivity(mContext,NOTIFICATION_ID,intent,PendingIntent.FLAG_UPDATE_CURRENT );
         NotificationCompat.Builder  builder = new NotificationCompat.Builder(mContext);
         Notification mNotification = builder.setSmallIcon(R.mipmap.ic_launcher)
@@ -35,6 +38,7 @@ public class SaleNotificationManager {
                 .setContentTitle(from)
                 .setContentText(notification)
                 .setLargeIcon(BitmapFactory.decodeResource(mContext.getResources(), R.mipmap.ic_launcher))
+                .setSound( RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION))
                 .build();
         mNotification.flags  |= Notification.FLAG_AUTO_CANCEL;
 

@@ -23,13 +23,20 @@ public class Constants {
     public static final int CODE_GET_REQUEST = 1024;
     public static final int CODE_POST_REQUEST = 1025;
 
-    // Google Map
+    // GeoFencing
     public static final String GEOFENCE_ID_CONESTOGA_COLLEGE = "Conestoga College";
-    public static final float GEOFENCE_RADIUS_IN_METERS = 100;
+    public static final double  CONESTOGA_COLLEGE_LANTITUDE = 43.3903;
+    public static final double  CONESTOGA_COLLEGE_LONGTITUDE = 80.4032;
+    public static final String GEOFENCE_ID_HOME = "HOME";
+    public static final double  GEOFENCE_HOME_LANTITUDE = 43.421252; //43.420528
+    public static final double  GEOFENCE_HOME_LONGTITUDE =-80.4748778; //-80.473902
+
+    public static final float GEOFENCE_RADIUS_IN_METERS = 100; //100
+    public static final int GEOFENCING_INTERVAL = 2000;
+    public static final int GEOFENCING_FASTEST_INTERVAL = 1000;
 
     //Store Key
     public static final String STORE_TITLE = "StoreName";
-
 
     public static final int[] gridTitleColor_ID ={
             R.color.colorAccent, R.color.categoryLightBlue,

@@ -82,8 +82,8 @@ public class CategoryFragment extends BaseFragment {
     }
 
     private List<StoreCategory> getStoreCategoryList() {
-        String[] categoryTitleList = new String[]{"Arts & Cultures", "Beauty", "Beer, Wine & Alchol", "Books", "Children & Baby", "Clothing & Accessories", "Eye Care", "Fitness & Sports", "Gifts, Stationary & Flowers", "Grocery & Specialty Food", "Home Furnishing & Interior", "Jewellers", "Music", "Variety & Specialty Shops"};
-        int[] categoryImageList = new int[]{R.drawable.electronics, R.drawable.entertainment, R.drawable.fashion, R.drawable.finance_insurance, R.drawable.lifestyle, R.drawable.motoring, R.drawable.other, R.drawable.travel, R.drawable.lifestyle, R.drawable.motoring, R.drawable.finance_insurance, R.drawable.fashion, R.drawable.electronics, R.drawable.entertainment, R.drawable.electronics};
+        String[] categoryTitleList = new String[]{"Arts & Cultures", "Beauty", "Beer, Wine & Alchol", "Books", "Children & Baby", "Clothing & Accessories", "Eye Care", "Fitness & Sports", "Gifts, Stationary & Flowers", "Grocery", "Home Furnishing & Interior", "Jewellers", "Music", "Variety & Specialty Shops","Food","Travel"};
+        int[] categoryImageList = new int[]{R.drawable.electronics, R.drawable.entertainment, R.drawable.fashion, R.drawable.finance_insurance, R.drawable.lifestyle, R.drawable.motoring, R.drawable.other, R.drawable.travel, R.drawable.lifestyle, R.drawable.motoring, R.drawable.finance_insurance, R.drawable.fashion, R.drawable.electronics, R.drawable.entertainment, R.drawable.electronics,R.drawable.lifestyle, R.drawable.entertainment};
 
         List<StoreCategory> categoryList = new ArrayList<StoreCategory>();
 

@@ -15,7 +15,9 @@ import android.widget.ProgressBar;
 
 import java.util.ArrayList;
 
+import capstone.msd.conestoga.instantsalenotifier.location.GeoFencingMapFragment;
 import capstone.msd.conestoga.instantsalenotifier.category.CategoryFragment;
+import capstone.msd.conestoga.instantsalenotifier.location.InstantSaleMapFragment;
 import capstone.msd.conestoga.instantsalenotifier.sales.StoreSalesFragment;
 import capstone.msd.conestoga.instantsalenotifier.location.PermissionUtils;
 import capstone.msd.conestoga.instantsalenotifier.uptown.UptownIntroFragment;
@@ -124,7 +126,7 @@ public class MainActivity extends AppCompatActivity
             mgrFragment.beginTransaction().replace(R.id.mainLayout, settingsFragment).commit();
 
         } else if (id == R.id.nav_geoFence) {
-            GeoFencingSalesMapFragment geoFencingFragment = new GeoFencingSalesMapFragment();
+            GeoFencingMapFragment geoFencingFragment = new GeoFencingMapFragment();
             FragmentManager mgrFragment = this.getSupportFragmentManager();
             mgrFragment.beginTransaction().replace(R.id.mainLayout, geoFencingFragment).commit();
         }

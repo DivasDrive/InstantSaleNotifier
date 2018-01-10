@@ -3,27 +3,18 @@ package capstone.msd.conestoga.instantsalenotifier.messaging;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.util.Log;
-import android.view.View;
 import android.widget.Toast;
 
-import com.google.android.gms.maps.model.LatLng;
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.iid.FirebaseInstanceIdService;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 
-import capstone.msd.conestoga.instantsalenotifier.InstantSaleMapFragment;
 import capstone.msd.conestoga.instantsalenotifier.database.RequestHandler;
-import capstone.msd.conestoga.instantsalenotifier.model.Store;
 import capstone.msd.conestoga.instantsalenotifier.utils.Constants;
-
-import static android.view.View.GONE;
-import static com.facebook.FacebookSdk.getApplicationContext;
 
 /**
  * Created by CatherineChoi on 12/11/2017.

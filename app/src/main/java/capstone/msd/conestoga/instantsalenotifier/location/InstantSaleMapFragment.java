@@ -1,4 +1,4 @@
-package capstone.msd.conestoga.instantsalenotifier;
+package capstone.msd.conestoga.instantsalenotifier.location;
 
 import android.content.Context;
 import android.content.pm.PackageManager;
@@ -32,16 +32,13 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import capstone.msd.conestoga.instantsalenotifier.R;
 import capstone.msd.conestoga.instantsalenotifier.sales.StoreSalesFragment;
 import capstone.msd.conestoga.instantsalenotifier.database.DataBaseConnection;
 import capstone.msd.conestoga.instantsalenotifier.database.RequestHandler;
-import capstone.msd.conestoga.instantsalenotifier.location.PermissionUtils;
 import capstone.msd.conestoga.instantsalenotifier.model.Store;
 import capstone.msd.conestoga.instantsalenotifier.utils.Constants;
 
